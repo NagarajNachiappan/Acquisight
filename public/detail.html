@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract Details - AcquiSight</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .sidebar {
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .external-links {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 20px;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .link-wrapper {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .link-wrapper:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .external-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .pdf-report-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: left;
+        }
+
+        .pdf-report-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+
+        .container {
+            flex: 1;
+            max-width: 1200px;
+        }
+
+        .header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .detail-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .award-header {
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .award-id {
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .recipient-name {
+            font-size: 24px;
+            font-weight: 600;
+            color: white;
+            opacity: 0.95;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .data-item {
+            background: #f8f9fa;
+            padding: 18px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .data-label {
+            font-size: 13px;
+            color: #999;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .data-value {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .data-value.amount {
+            font-size: 20px;
+            color: #4caf50;
+            font-weight: 700;
+        }
+
+        .data-value.agency {
+            font-size: 16px;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .description-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #c62828;
+        }
+
+        .raw-json-section {
+            margin-top: 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .raw-json-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .raw-json-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .copy-json-btn {
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .copy-json-btn:hover {
+            background: #764ba2;
+        }
+
+        .json-container {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .json-container pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+        <div class="external-links">
+            <div class="sidebar-title">🔗 External Links</div>
+            <div id="externalLinksContainer">
+                <p style="color: #999; font-size: 14px; text-align: center;">Loading...</p>
+            </div>
+        </div>
+
+        <div class="external-links" style="margin-top: 20px;">
+            <div class="sidebar-title">📄 PDF Reports</div>
+            <div>
+                <button onclick="generateUSAspendingReport()" class="pdf-report-btn">
+                    🏛️ USAspending.gov Report
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="header">
+            <h1>
+                <span>📄</span>
+                Contract Details
+            </h1>
+            <button class="back-btn" onclick="history.back()">← Back to Results</button>
+        </div>
+
+        <div id="loadingContainer" class="loading">
+            <div class="spinner"></div>
+            <p style="color: #666;">Loading contract details...</p>
+        </div>
+
+        <div id="detailContainer" style="display: none;"></div>
+    </div>
+
+    <script>
+        // Get award ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const awardId = urlParams.get('awardId');
+
+        if (!awardId) {
+            document.getElementById('loadingContainer').innerHTML = '<div class="error-message">No award ID provided</div>';
+        } else {
+            // Always call the API to get fresh, complete data using the proper two-step flow
+            loadAwardDetails(awardId);
+        }
+
+        async function loadAwardDetails(awardId) {
+            try {
+                const response = await fetch('/api/award/details/' + encodeURIComponent(awardId));
+                const data = await response.json();
+
+                // Hide loading
+                document.getElementById('loadingContainer').style.display = 'none';
+                document.getElementById('detailContainer').style.display = 'block';
+
+                if (response.ok && data) {
+                    displayAwardDetails(data);
+                } else {
+                    document.getElementById('detailContainer').innerHTML = '<div class="error-message">Failed to load award details. The API may not have detailed information for this award ID.</div>';
+                }
+            } catch (error) {
+                document.getElementById('loadingContainer').style.display = 'none';
+                document.getElementById('detailContainer').style.display = 'block';
+                document.getElementById('detailContainer').innerHTML = '<div class="error-message"><strong>Error:</strong> ' + error.message + '<br><br>This may occur if the award details API endpoint is not available for this contract.</div>';
+            }
+        }
+
+        function displayContractFromSearch(contract) {
+            const container = document.getElementById('detailContainer');
+            
+            const awardId = contract['Award ID'] || 'N/A';
+            // Use internal_id if available (not requested but might be returned), otherwise fall back
+            const internalId = contract['internal_id'] || contract['generated_unique_award_id'] || awardId;
+            const generatedAwardId = contract['generated_unique_award_id'] || 'N/A';
+            const recipientName = contract['Recipient Name'] || 'Unknown';
+            const description = contract['Description'] || 'No description available';
+            
+            // Update external links sidebar - use internal_id for URL
+            updateExternalLinks(awardId, internalId);
+            
+            // Financial data
+            const totalObligation = contract['Total Obligation'] || 0;
+            const awardAmount = contract['Award Amount'] || 0;
+            const potentialAwardAmount = contract['Potential Award Amount'] || 0;
+            const totalOutlays = contract['Total Outlays'] || 0;
+            
+            // Agency data
+            const awardingAgency = contract['Awarding Agency'] || 'N/A';
+            const awardingSubAgency = contract['Awarding Sub Agency'] || 'N/A';
+            const fundingAgency = contract['funding_agency_name'] || 'N/A';
+            
+            // Period of performance
+            const popStart = contract['Period of Performance Start Date'] || contract['Start Date'] || 'N/A';
+            const popEnd = contract['Period of Performance Current End Date'] || contract['End Date'] || 'N/A';
+            const popPotentialEnd = contract['Period of Performance Potential End Date'] || 'N/A';
+            
+            // Competition data
+            const numberOfOffers = contract['Number of Offers Received'] || 'N/A';
+            const extentCompeted = contract['Extent Competed'] || 'N/A';
+            const setAside = contract['Type of Set Aside'] || 'N/A';
+            const solicitationProcedures = contract['Solicitation Procedures'] || 'N/A';
+            const contractPricing = contract['Type of Contract Pricing'] || 'N/A';
+            
+            container.innerHTML = `
+                <div class="detail-container">
+                    <div class="award-header">
+                        <div class="award-id">${awardId}</div>
+                        <div class="recipient-name">${recipientName}</div>
+                        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.3);">
+                            <div style="font-size: 13px; opacity: 0.8; margin-bottom: 5px;">ID for USAspending.gov URL:</div>
+                            <div style="font-size: 18px; font-family: monospace; opacity: 0.95; font-weight: 700; word-break: break-all;">${internalId}</div>
+                        </div>
+                    </div>
+
+                    <!-- Financial Information -->
+                    <div class="section">
+                        <div class="section-title">💰 Financial Information</div>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="data-label">Total Obligation</div>
+                                <div class="data-value amount">$${totalObligation.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Award Amount</div>
+                                <div class="data-value amount">$${awardAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Potential Award Amount</div>
+                                <div class="data-value amount">$${potentialAwardAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Total Outlays</div>
+                                <div class="data-value amount">$${totalOutlays.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agency Information -->
+                    <div class="section">
+                        <div class="section-title">🏛️ Agency Information</div>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="data-label">Awarding Agency</div>
+                                <div class="data-value agency">${awardingAgency}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Awarding Sub-Agency</div>
+                                <div class="data-value agency">${awardingSubAgency}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Funding Agency</div>
+                                <div class="data-value agency">${fundingAgency}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Period of Performance -->
+                    <div class="section">
+                        <div class="section-title">📅 Period of Performance</div>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="data-label">Start Date</div>
+                                <div class="data-value">${popStart}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Current End Date</div>
+                                <div class="data-value">${popEnd}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Potential End Date</div>
+                                <div class="data-value">${popPotentialEnd}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Competition Information -->
+                    <div class="section">
+                        <div class="section-title">🏆 Competition Information</div>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="data-label">Number of Offers Received</div>
+                                <div class="data-value">${numberOfOffers}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Extent Competed</div>
+                                <div class="data-value">${extentCompeted}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Set-Aside Type</div>
+                                <div class="data-value">${setAside}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Solicitation Procedures</div>
+                                <div class="data-value">${solicitationProcedures}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Contract Pricing</div>
+                                <div class="data-value">${contractPricing}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="section">
+                        <div class="section-title">📝 Contract Description</div>
+                        <div class="description-box">
+                            ${description}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Raw JSON Data -->
+                <div class="raw-json-section">
+                    <div class="raw-json-header">
+                        <div class="raw-json-title">🔧 Raw API Data (JSON)</div>
+                        <button class="copy-json-btn" onclick="copyRawJson()">📋 Copy JSON</button>
+                    </div>
+                    
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 3px solid #2196f3;">
+                        <div style="font-size: 14px; font-weight: 600; color: #1976d2; margin-bottom: 8px;">
+                            Data Source:
+                        </div>
+                        <div style="background: #fff3e0; padding: 12px; border-radius: 6px; border-left: 3px solid #ff9800; margin-bottom: 8px;">
+                            <div style="font-size: 13px; font-weight: 600; color: #e65100; margin-bottom: 4px;">
+                                📊 From Search Results (SessionStorage)
+                            </div>
+                            <div style="font-size: 12px; color: #666;">
+                                This data was retrieved from the search API and stored locally.
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
+                            <span style="background: #4caf50; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 700;">
+                                POST
+                            </span>
+                            <code style="flex: 1; background: white; padding: 8px 12px; border-radius: 4px; font-size: 13px; color: #333; word-break: break-all;">
+                                https://api.usaspending.gov/api/v2/search/spending_by_award/
+                            </code>
+                        </div>
+                        <div style="font-size: 12px; color: #666;">
+                            Original search: <strong>${awardId}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="json-container">
+                        <pre id="rawJsonData">${JSON.stringify(contract, null, 2)}</pre>
+                    </div>
+                </div>
+            `;
+        }
+
+        function displayAwardDetails(data) {
+            const container = document.getElementById('detailContainer');
+            
+            // Extract metadata from our custom fields
+            const apiEndpoint = data._api_endpoint || 'N/A';
+            const searchEndpoint = data._search_endpoint || 'N/A';
+            const generatedInternalId = data._generated_internal_id || 'N/A';
+            const originalAwardId = data._award_id || 'N/A';
+            
+            const awardId = data.piid || data.fain || data.uri || originalAwardId;
+            const recipientName = data.recipient?.recipient_name || 'Unknown';
+            const description = data.description || 'No description available';
+            
+            // Financial data
+            const totalObligation = data.total_obligation || 0;
+            const baseAndAllOptionsValue = data.base_and_all_options_value || 0;
+            const baseExercisedOptionsValue = data.base_exercised_options_val || 0;
+            
+            // Agency data
+            const awardingAgency = data.awarding_agency?.toptier_agency?.name || 'N/A';
+            const awardingSubAgency = data.awarding_agency?.subtier_agency?.name || 'N/A';
+            const fundingAgency = data.funding_agency?.toptier_agency?.name || 'N/A';
+            
+            // Period of performance
+            const popStart = data.period_of_performance_start_date || 'N/A';
+            const popEnd = data.period_of_performance_current_end_date || 'N/A';
+            const popPotentialEnd = data.period_of_performance_potential_end_date || 'N/A';
+            
+            // Competition data
+            const solicitationProcedures = data.type_of_contract_pricing || 'N/A';
+            const numberOfOffers = data.number_of_offers_received || 'N/A';
+            const extentCompeted = data.extent_competed || 'N/A';
+            const setAside = data.type_set_aside || 'N/A';
+            
+            container.innerHTML = `
+                <div class="detail-container">
+                    <div class="award-header">
+                        <div class="award-id">${awardId}</div>
+                        <div class="recipient-name">${recipientName}</div>
+                        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.3);">
+                            <div style="font-size: 13px; opacity: 0.8; margin-bottom: 5px;">Generated Internal ID (for USAspending.gov URL):</div>
+                            <div style="font-size: 16px; font-family: monospace; opacity: 0.95; font-weight: 700; word-break: break-all;">${generatedInternalId}</div>
+                        </div>
+                    </div>
+
+                    <!-- Financial Information -->
+                    <div class="section">
+                        <div class="section-title">💰 Financial Information</div>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="data-label">Total Obligation</div>
+                                <div class="data-value amount">$${totalObligation.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Base & All Options Value</div>
+                                <div class="data-value amount">$${baseAndAllOptionsValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Base Exercised Options</div>
+                                <div class="data-value amount">$${baseExercisedOptionsValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agency Information -->
+                    <div class="section">
+                        <div class="section-title">🏛️ Agency Information</div>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="data-label">Awarding Agency</div>
+                                <div class="data-value agency">${awardingAgency}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Awarding Sub-Agency</div>
+                                <div class="data-value agency">${awardingSubAgency}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Funding Agency</div>
+                                <div class="data-value agency">${fundingAgency}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Period of Performance -->
+                    <div class="section">
+                        <div class="section-title">📅 Period of Performance</div>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="data-label">Start Date</div>
+                                <div class="data-value">${popStart}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Current End Date</div>
+                                <div class="data-value">${popEnd}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Potential End Date</div>
+                                <div class="data-value">${popPotentialEnd}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Competition Information -->
+                    <div class="section">
+                        <div class="section-title">🏆 Competition Information</div>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="data-label">Number of Offers Received</div>
+                                <div class="data-value">${numberOfOffers}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Extent Competed</div>
+                                <div class="data-value">${extentCompeted}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Set-Aside Type</div>
+                                <div class="data-value">${setAside}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">Solicitation Procedures</div>
+                                <div class="data-value">${solicitationProcedures}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="section">
+                        <div class="section-title">📝 Contract Description</div>
+                        <div class="description-box">
+                            ${description}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Raw JSON Data -->
+                <div class="raw-json-section">
+                    <div class="raw-json-header">
+                        <div class="raw-json-title">🔧 Raw API Data (JSON)</div>
+                        <button class="copy-json-btn" onclick="copyRawJson()">📋 Copy JSON</button>
+                    </div>
+                    
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 3px solid #2196f3;">
+                        <div style="font-size: 14px; font-weight: 600; color: #1976d2; margin-bottom: 12px;">
+                            API Call Flow (Two-Step Process):
+                        </div>
+                        
+                        <div style="background: white; padding: 12px; border-radius: 6px; margin-bottom: 10px;">
+                            <div style="font-size: 12px; font-weight: 600; color: #666; margin-bottom: 6px;">
+                                Step 1: Resolve Award ID to Generated Internal ID
+                            </div>
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <span style="background: #4caf50; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">
+                                    POST
+                                </span>
+                                <code style="flex: 1; background: #f5f5f5; padding: 6px 10px; border-radius: 4px; font-size: 12px; color: #333; word-break: break-all;">
+                                    ${searchEndpoint}
+                                </code>
+                            </div>
+                        </div>
+                        
+                        <div style="background: white; padding: 12px; border-radius: 6px;">
+                            <div style="font-size: 12px; font-weight: 600; color: #666; margin-bottom: 6px;">
+                                Step 2: Get Full Award Details
+                            </div>
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <span style="background: #2196f3; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">
+                                    GET
+                                </span>
+                                <code style="flex: 1; background: #f5f5f5; padding: 6px 10px; border-radius: 4px; font-size: 12px; color: #333; word-break: break-all;">
+                                    ${apiEndpoint}
+                                </code>
+                            </div>
+                        </div>
+                        
+                        <div style="font-size: 12px; color: #666; margin-top: 10px;">
+                            Generated Internal ID: <strong>${generatedInternalId}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="json-container">
+                        <pre id="rawJsonData">${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                </div>
+            `;
+            
+            // Update external links sidebar
+            updateExternalLinks(awardId, generatedInternalId);
+        }
+
+        function updateExternalLinks(awardId, urlId) {
+            const linksContainer = document.getElementById('externalLinksContainer');
+            
+            // Construct USAspending.gov URL
+            // Use the provided ID (generated_unique_award_id or fallback)
+            const usaspendingUrl = urlId 
+                ? 'https://www.usaspending.gov/award/' + encodeURIComponent(urlId)
+                : 'https://www.usaspending.gov/award/' + encodeURIComponent(awardId);
+            
+            if (usaspendingUrl) {
+                linksContainer.innerHTML = `
+                    <div class="link-wrapper">
+                        <a href="${usaspendingUrl}" target="_blank" rel="noopener noreferrer" class="external-link">
+                            <span>🏛️ View on USAspending.gov</span>
+                            <button class="copy-btn" onclick="event.preventDefault(); event.stopPropagation(); copyUrl('${usaspendingUrl.replace(/'/g, "\\'")}')">
+                                📋 Copy
+                            </button>
+                        </a>
+                    </div>
+                `;
+            } else {
+                linksContainer.innerHTML = '<p style="color: #999; font-size: 14px; text-align: center;">No external links available</p>';
+            }
+        }
+
+        function copyUrl(url) {
+            const btn = event.target;
+            const originalText = btn.textContent;
+            
+            // Try modern clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    btn.textContent = '✅ Copied!';
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Clipboard API failed:', err);
+                    // Fallback to older method
+                    copyUrlFallback(url, btn, originalText);
+                });
+            } else {
+                // Use fallback for older browsers
+                copyUrlFallback(url, btn, originalText);
+            }
+        }
+
+        function copyUrlFallback(url, btn, originalText) {
+            try {
+                // Create temporary textarea
+                const textarea = document.createElement('textarea');
+                textarea.value = url;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            } catch (err) {
+                console.error('Fallback copy failed:', err);
+                alert('Copy failed. URL: ' + url);
+            }
+        }
+
+        function copyRawJson() {
+            const jsonText = document.getElementById('rawJsonData').textContent;
+            const btn = event.target;
+            const originalText = btn.textContent;
+            
+            // Try modern clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(jsonText).then(() => {
+                    btn.textContent = '✅ Copied!';
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Clipboard API failed:', err);
+                    copyJsonFallback(jsonText, btn, originalText);
+                });
+            } else {
+                copyJsonFallback(jsonText, btn, originalText);
+            }
+        }
+
+        function copyJsonFallback(text, btn, originalText) {
+            try {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            } catch (err) {
+                console.error('Fallback copy failed:', err);
+                alert('Failed to copy JSON');
+            }
+        }
+
+        async function generateUSAspendingReport() {
+            const btn = event.target;
+            const originalText = btn.textContent;
+            
+            try {
+                // Get the USAspending.gov URL from the external links
+                const linkElement = document.querySelector('.external-link');
+                const usaspendingUrl = linkElement ? linkElement.href : null;
+                
+                if (!usaspendingUrl) {
+                    alert('USAspending.gov URL not found');
+                    return;
+                }
+                
+                const awardId = urlParams.get('awardId') || 'Contract';
+                
+                // Update button to show loading
+                btn.textContent = '⏳ Generating PDF...';
+                btn.disabled = true;
+                
+                console.log('📄 Requesting PDF generation for:', usaspendingUrl);
+                
+                // Call server to generate PDF
+                const response = await fetch('/api/generate-usaspending-pdf', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        url: usaspendingUrl,
+                        awardId: awardId
+                    })
+                });
+                
+                if (response.ok) {
+                    // Download the PDF
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `usaspending-report-${awardId}-${Date.now()}.pdf`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                    
+                    btn.textContent = '✅ PDF Downloaded!';
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.disabled = false;
+                    }, 2000);
+                } else {
+                    const error = await response.json();
+                    throw new Error(error.message || 'PDF generation failed');
+                }
+                
+            } catch (error) {
+                console.error('PDF generation error:', error);
+                alert('Failed to generate PDF: ' + error.message);
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
+

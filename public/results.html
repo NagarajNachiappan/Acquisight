@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - AcquiSight</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .search-info {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .search-info p {
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .search-query {
+            font-size: 20px;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .results-container {
+            display: grid;
+            gap: 20px;
+        }
+
+        .contract-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 25px;
+            cursor: pointer;
+        }
+
+        .contract-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            border-left-color: #764ba2;
+        }
+
+        .contract-header {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .contract-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .contract-amount {
+            font-size: 24px;
+            color: #4caf50;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .contract-id {
+            font-size: 14px;
+            color: #666;
+            font-family: monospace;
+            background: #f5f5f5;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .contract-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: #999;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .no-results h2 {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #c62828;
+            margin-bottom: 20px;
+        }
+
+        .raw-json-section {
+            margin-top: 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .raw-json-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .raw-json-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .copy-json-btn {
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .copy-json-btn:hover {
+            background: #764ba2;
+        }
+
+        .json-container {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .json-container pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <span>📊</span>
+                Search Results
+            </h1>
+            <a href="/" class="back-btn">← New Search</a>
+        </div>
+
+        <div class="search-info">
+            <p>Searching for:</p>
+            <div class="search-query" id="searchQuery"></div>
+        </div>
+
+        <div id="loadingContainer" class="loading">
+            <div class="spinner"></div>
+            <p style="color: #666;">Searching USAspending.gov database...</p>
+        </div>
+
+        <div id="resultsContainer" class="results-container" style="display: none;"></div>
+    </div>
+
+    <script>
+        // Get search query from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('q');
+
+        document.getElementById('searchQuery').textContent = searchQuery || 'N/A';
+
+        if (!searchQuery) {
+            document.getElementById('loadingContainer').innerHTML = '<div class="error-message">No search query provided</div>';
+        } else {
+            // Perform search
+            searchUSAspending(searchQuery);
+        }
+
+        async function searchUSAspending(query) {
+            try {
+                const response = await fetch('/api/search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        keywords: query
+                    })
+                });
+
+                const data = await response.json();
+
+                // Hide loading
+                document.getElementById('loadingContainer').style.display = 'none';
+                document.getElementById('resultsContainer').style.display = 'block';
+
+                if (data.results && data.results.length > 0) {
+                    displayResults(data.results);
+                } else {
+                    document.getElementById('resultsContainer').innerHTML = `
+                        <div class="no-results">
+                            <h2>No results found</h2>
+                            <p>Try a different search term</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                document.getElementById('loadingContainer').style.display = 'none';
+                document.getElementById('resultsContainer').style.display = 'block';
+                document.getElementById('resultsContainer').innerHTML = `
+                    <div class="error-message">
+                        <strong>Error:</strong> ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        function displayResults(contracts) {
+            const container = document.getElementById('resultsContainer');
+            container.innerHTML = '';
+
+            // Display contract cards
+            contracts.forEach(contract => {
+                const card = document.createElement('div');
+                card.className = 'contract-card';
+
+                const recipientName = contract['Recipient Name'] || 'Unknown';
+                const obligatedAmount = contract['Total Obligation'] || contract['Award Amount'] || 0;
+                const awardId = contract['Award ID'] || 'N/A';
+                const generatedAwardId = contract['generated_unique_award_id'] || awardId;
+                const description = contract['Description'] || 'No description available';
+                const awardingAgency = contract['Awarding Agency'] || 'N/A';
+                const startDate = contract['Start Date'] || 'N/A';
+                const endDate = contract['End Date'] || 'N/A';
+
+                // Make card clickable - navigate to detail page
+                // Pass the entire contract data as URL parameters
+                card.onclick = function() {
+                    // Store contract data in sessionStorage for detail page
+                    sessionStorage.setItem('selectedContract', JSON.stringify(contract));
+                    window.location.href = '/detail.html?awardId=' + encodeURIComponent(awardId);
+                };
+
+                card.innerHTML = `
+                    <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 15px;">
+                        <div style="font-size: 24px; font-weight: 700; color: #333;">${awardId}</div>
+                        <div style="font-size: 24px; font-weight: 700; color: #667eea;">${awardingAgency}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 18px; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 15px;">
+                        <div style="font-size: 20px; font-weight: 600; color: #64b5f6;">${recipientName}</div>
+                        <div style="font-size: 20px; font-weight: 700; color: #4caf50;">$${obligatedAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 16px; font-size: 15px; color: #666;">
+                        <strong>Start Date:</strong> ${startDate} &nbsp;&nbsp;|&nbsp;&nbsp; <strong>End Date:</strong> ${endDate}
+                    </div>
+                    
+                    <div style="font-size: 15px; color: #555; line-height: 1.8; margin-top: 12px;">
+                        ${description}
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+
+            // Add raw JSON section at the bottom
+            const jsonSection = document.createElement('div');
+            jsonSection.className = 'raw-json-section';
+            
+            // Construct the API URL that was called
+            const apiUrl = 'https://api.usaspending.gov/api/v2/search/spending_by_award/';
+            const apiMethod = 'POST';
+            
+            jsonSection.innerHTML = `
+                <div class="raw-json-header">
+                    <div class="raw-json-title">🔧 Raw API Response (JSON)</div>
+                    <button class="copy-json-btn" onclick="copyRawJson()">📋 Copy All JSON</button>
+                </div>
+                
+                <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 3px solid #2196f3;">
+                    <div style="font-size: 14px; font-weight: 600; color: #1976d2; margin-bottom: 8px;">
+                        API Endpoint Called:
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
+                        <span style="background: #4caf50; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 700;">
+                            ${apiMethod}
+                        </span>
+                        <code style="flex: 1; background: white; padding: 8px 12px; border-radius: 4px; font-size: 13px; color: #333; word-break: break-all;">
+                            ${apiUrl}
+                        </code>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Searched for: <strong>${searchQuery}</strong> | Last 2 years
+                    </div>
+                </div>
+                
+                <div class="json-container">
+                    <pre id="rawJsonData">${JSON.stringify(contracts, null, 2)}</pre>
+                </div>
+            `;
+            container.appendChild(jsonSection);
+        }
+
+        function copyRawJson() {
+            const jsonText = document.getElementById('rawJsonData').textContent;
+            const btn = event.target;
+            const originalText = btn.textContent;
+            
+            // Try modern clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(jsonText).then(() => {
+                    btn.textContent = '✅ Copied!';
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Clipboard API failed:', err);
+                    copyJsonFallback(jsonText, btn, originalText);
+                });
+            } else {
+                copyJsonFallback(jsonText, btn, originalText);
+            }
+        }
+
+        function copyJsonFallback(text, btn, originalText) {
+            try {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            } catch (err) {
+                console.error('Fallback copy failed:', err);
+                alert('Failed to copy JSON');
+            }
+        }
+    </script>
+</body>
+</html>
+
