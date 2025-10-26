@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contract Details - AcquiSight</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -215,19 +216,101 @@
             gap: 20px;
         }
 
+        .data-grid.pop-grid {
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        .data-grid.pop-grid .data-label {
+            min-height: 40px;
+            align-items: flex-start;
+        }
+
+        .data-grid.pop-grid .data-value {
+            margin-top: 8px;
+            min-height: 24px;
+        }
+
         .data-item {
-            background: #f8f9fa;
-            padding: 18px;
-            border-radius: 8px;
-            border-left: 3px solid #667eea;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            position: relative;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .data-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: #d1d5db;
         }
 
         .data-label {
             font-size: 13px;
-            color: #999;
+            color: #6b7280;
             font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: help;
+        }
+
+        .info-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            background: #e5e7eb;
+            color: #6b7280;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 700;
+            font-style: normal;
+            line-height: 1;
+            transition: all 0.2s ease;
+        }
+
+        .data-item:hover .info-icon {
+            background: #667eea;
+            color: white;
+        }
+
+        .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+            background: #1f2937;
+            color: white;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: none;
+            white-space: normal;
+            width: 260px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            z-index: 1000;
+            line-height: 1.5;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #1f2937;
+        }
+
+        .data-item:hover .tooltip {
+            opacity: 1;
         }
 
         .data-value {
@@ -237,24 +320,129 @@
         }
 
         .data-value.amount {
-            font-size: 20px;
-            color: #4caf50;
+            font-size: 18px;
+            color: #111827;
             font-weight: 700;
+            line-height: 1.4;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         .data-value.agency {
-            font-size: 16px;
-            color: #667eea;
+            font-size: 18px;
+            color: #374151;
             font-weight: 600;
         }
 
+        .percentage-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-radius: 50%;
+            font-size: 13px;
+            font-weight: 700;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+            line-height: 1;
+        }
+
+        .count-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border-radius: 50%;
+            font-size: 13px;
+            font-weight: 700;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+            line-height: 1;
+        }
+
+        .section-count-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-left: 12px;
+            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+        }
+
+        .days-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+            line-height: 1;
+            white-space: nowrap;
+        }
+
         .description-box {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 8px;
-            border-left: 3px solid #667eea;
-            line-height: 1.8;
-            color: #555;
+            background: #ffffff;
+            padding: 0;
+            border-radius: 20px;
+            border: 3px solid transparent;
+            background-image: linear-gradient(#fff, #fff), linear-gradient(135deg, #667eea, #764ba2);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .description-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .description-badge {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .description-icon {
+            font-size: 24px;
+        }
+
+        .description-content {
+            padding: 30px;
+            line-height: 1.9;
+            color: #2c3e50;
+            font-size: 16px;
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f9ff 100%);
         }
 
         .error-message {
@@ -320,23 +508,390 @@
             line-height: 1.6;
             color: #333;
         }
+
+        .subcontractor-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .subcontractor-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .subcontractor-table th {
+            padding: 15px 20px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .subcontractor-table tbody tr {
+            border-bottom: 1px solid #e5e7eb;
+            transition: background 0.2s ease;
+        }
+
+        .subcontractor-table tbody tr:hover {
+            background: #f8f9ff;
+        }
+
+        .subcontractor-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .subcontractor-table td {
+            padding: 18px 20px;
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .subcontractor-table td.amount {
+            font-weight: 700;
+            color: #111827;
+            font-size: 15px;
+        }
+
+        .subcontractor-table td.percentage {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .loading-message {
+            text-align: center;
+            padding: 40px;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .no-data-message {
+            text-align: center;
+            padding: 40px;
+            color: #9ca3af;
+            font-size: 15px;
+        }
+
+        .description-cell {
+            max-width: 300px;
+            cursor: pointer;
+            position: relative;
+            font-size: 9px;
+        }
+
+        .description-cell.truncated {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .description-cell.expanded {
+            white-space: normal;
+            background: #f8f9ff;
+            padding: 12px !important;
+            border-radius: 4px;
+        }
+
+        .expand-dots {
+            color: #667eea;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .expand-dots:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .toggle-desc-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: background 0.2s;
+        }
+
+        .toggle-desc-btn:hover {
+            background: #764ba2;
+        }
+
+        .toggle-rows-btn {
+            padding: 6px 14px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-left: 10px;
+        }
+
+        .toggle-rows-btn:hover {
+            background: #764ba2;
+        }
+
+        .subcontractor-table tbody tr.hidden-row {
+            display: none;
+        }
+
+        .developer-corner-toggle {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .toggle-dev-corner-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .toggle-dev-corner-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .developer-corner {
+            margin-top: 20px;
+            padding: 40px;
+            background: linear-gradient(135deg, #1a1d29 0%, #2c3e50 100%);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .developer-corner.visible {
+            display: block;
+        }
+
+        .developer-corner-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .developer-corner-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .developer-corner-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .raw-json-section {
+            margin-bottom: 30px;
+        }
+
+        .raw-json-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .download-excel-btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+
+        .download-excel-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .section-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-header-row .section-title {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .main-results-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .main-results-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .main-results-subtitle {
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 8px;
+        }
+
+        /* Print styles for Curated Report */
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+                display: block;
+            }
+
+            .sidebar {
+                display: none !important;
+            }
+
+            .header {
+                display: none !important;
+            }
+
+            .developer-corner-toggle,
+            .developer-corner {
+                display: none !important;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 20px;
+            }
+
+            .detail-container {
+                box-shadow: none;
+                padding: 0;
+            }
+
+            .subcontractor-table tbody tr.hidden-row {
+                display: table-row !important;
+            }
+
+            .description-cell.truncated {
+                white-space: normal !important;
+                overflow: visible !important;
+                text-overflow: clip !important;
+            }
+
+            .toggle-rows-btn,
+            .download-excel-btn,
+            .toggle-desc-btn,
+            .back-btn,
+            .copy-btn,
+            .copy-json-btn,
+            .info-icon,
+            .tooltip {
+                display: none !important;
+            }
+
+            .percentage-badge,
+            .days-badge,
+            .count-badge,
+            .section-count-badge {
+                position: static !important;
+                margin-left: 8px;
+                display: inline-flex !important;
+            }
+
+            .section-header-row {
+                display: block;
+            }
+
+            .data-label {
+                font-size: 11px !important;
+            }
+
+            .section-title {
+                border-bottom: 2px solid #667eea !important;
+                padding-bottom: 10px !important;
+            }
+
+            .award-header,
+            .main-results-header {
+                break-inside: avoid;
+            }
+
+            .section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .subcontractor-table,
+            table {
+                page-break-inside: auto;
+            }
+
+            .subcontractor-table tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Left Sidebar -->
     <div class="sidebar">
+        <!-- Utils: Opportunity IDs Box -->
+        <div class="external-links" style="margin-bottom: 20px;">
+            <div class="sidebar-title">🔧 Utils - IDs</div>
+            <div id="oppIdContainer">
+                <p style="color: #999; font-size: 14px; text-align: center;">Loading...</p>
+            </div>
+        </div>
+
         <div class="external-links">
-            <div class="sidebar-title">🔗 External Links</div>
+            <div class="sidebar-title">🔗 Utils - Links</div>
             <div id="externalLinksContainer">
                 <p style="color: #999; font-size: 14px; text-align: center;">Loading...</p>
             </div>
         </div>
 
         <div class="external-links" style="margin-top: 20px;">
-            <div class="sidebar-title">📄 PDF Reports</div>
+            <div class="sidebar-title">📄 Utils - Reports</div>
             <div>
                 <button onclick="generateUSAspendingReport()" class="pdf-report-btn">
                     🏛️ USAspending.gov Report
+                </button>
+                <button onclick="generateCuratedReport()" class="pdf-report-btn" style="margin-top: 10px;">
+                    📊 Curated Contract Report
                 </button>
             </div>
         </div>
@@ -361,6 +916,31 @@
     </div>
 
     <script>
+        // Helper function to convert text to Title Case
+        function toTitleCase(str) {
+            if (!str || str === 'N/A') return str;
+            return str.toLowerCase().replace(/\b\w/g, function(char) {
+                return char.toUpperCase();
+            });
+        }
+
+        // Helper function to calculate days difference
+        function calculateDaysDifference(dateString) {
+            if (!dateString || dateString === 'N/A') return null;
+            
+            const endDate = new Date(dateString);
+            const today = new Date();
+            
+            // Reset time to midnight for accurate day comparison
+            endDate.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0);
+            
+            const diffTime = endDate - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            return diffDays;
+        }
+
         // Get award ID from URL
         const urlParams = new URLSearchParams(window.location.search);
         const awardId = urlParams.get('awardId');
@@ -368,28 +948,66 @@
         if (!awardId) {
             document.getElementById('loadingContainer').innerHTML = '<div class="error-message">No award ID provided</div>';
         } else {
-            // Always call the API to get fresh, complete data using the proper two-step flow
-            loadAwardDetails(awardId);
+            // Get contract from sessionStorage to extract the generated_unique_award_id
+            const storedContract = sessionStorage.getItem('selectedContract');
+            
+            if (storedContract) {
+                try {
+                    const contract = JSON.parse(storedContract);
+                    
+                    // Update Opp ID box with all IDs from search results
+                    updateOppIdBox(contract);
+                    
+                    // Update external links immediately
+                    const displayAwardId = contract['Award ID'] || awardId;
+                    const urlId = contract['internal_id'] || contract['generated_unique_award_id'] || awardId;
+                    const genId = contract['generated_unique_award_id'] || 'N/A';
+                    updateExternalLinks(displayAwardId, urlId, genId);
+                    
+                    // Get the generated_unique_award_id to call the awards API
+                    const generatedUniqueAwardId = contract['generated_unique_award_id'] || contract['generated_internal_id'];
+                    
+                    if (generatedUniqueAwardId) {
+                        // Call the awards API to get complete details
+                        loadAwardDetails(generatedUniqueAwardId, displayAwardId);
+                    } else {
+                        // Fallback: display from search results
+                        document.getElementById('loadingContainer').style.display = 'none';
+                        document.getElementById('detailContainer').style.display = 'block';
+                        displayContractFromSearch(contract);
+                    }
+                } catch (e) {
+                    console.error('Error parsing stored contract:', e);
+                    document.getElementById('loadingContainer').innerHTML = '<div class="error-message">Failed to load contract data</div>';
+                }
+            } else {
+                document.getElementById('loadingContainer').innerHTML = '<div class="error-message">No contract data found. Please search again.</div>';
+            }
         }
 
-        async function loadAwardDetails(awardId) {
+        async function loadAwardDetails(generatedUniqueAwardId, displayAwardId) {
             try {
-                const response = await fetch('/api/award/details/' + encodeURIComponent(awardId));
+                console.log('🔍 Calling awards API for:', generatedUniqueAwardId);
+                
+                const response = await fetch('/api/award/details/' + encodeURIComponent(generatedUniqueAwardId));
                 const data = await response.json();
 
                 // Hide loading
                 document.getElementById('loadingContainer').style.display = 'none';
                 document.getElementById('detailContainer').style.display = 'block';
 
-                if (response.ok && data) {
-                    displayAwardDetails(data);
+                if (response.ok && data && !data.error) {
+                    console.log('✅ Awards API data received');
+                    displayAwardDetails(data, displayAwardId);
                 } else {
-                    document.getElementById('detailContainer').innerHTML = '<div class="error-message">Failed to load award details. The API may not have detailed information for this award ID.</div>';
+                    const errorMsg = data.message || data.error || 'Failed to load award details';
+                    document.getElementById('detailContainer').innerHTML = '<div class="error-message"><strong>Error:</strong> ' + errorMsg + '</div>';
                 }
             } catch (error) {
+                console.error('Award details error:', error);
                 document.getElementById('loadingContainer').style.display = 'none';
                 document.getElementById('detailContainer').style.display = 'block';
-                document.getElementById('detailContainer').innerHTML = '<div class="error-message"><strong>Error:</strong> ' + error.message + '<br><br>This may occur if the award details API endpoint is not available for this contract.</div>';
+                document.getElementById('detailContainer').innerHTML = '<div class="error-message"><strong>Error:</strong> ' + error.message + '</div>';
             }
         }
 
@@ -403,8 +1021,11 @@
             const recipientName = contract['Recipient Name'] || 'Unknown';
             const description = contract['Description'] || 'No description available';
             
+            // Update Opp ID box with all IDs
+            updateOppIdBox(contract);
+            
             // Update external links sidebar - use internal_id for URL
-            updateExternalLinks(awardId, internalId);
+            updateExternalLinks(awardId, internalId, generatedAwardId);
             
             // Financial data
             const totalObligation = contract['Total Obligation'] || 0;
@@ -413,14 +1034,18 @@
             const totalOutlays = contract['Total Outlays'] || 0;
             
             // Agency data
-            const awardingAgency = contract['Awarding Agency'] || 'N/A';
-            const awardingSubAgency = contract['Awarding Sub Agency'] || 'N/A';
-            const fundingAgency = contract['funding_agency_name'] || 'N/A';
+            const awardingAgencyTopTier = toTitleCase(contract['Awarding Agency']) || 'N/A';
+            const awardingAgencySubTier = toTitleCase(contract['Awarding Sub Agency']) || 'N/A';
+            const fundingAgencyTopTier = toTitleCase(contract['Funding Agency'] || contract['funding_agency_name']) || 'N/A';
+            const fundingAgencySubTier = toTitleCase(contract['Funding Sub Agency']) || 'N/A';
+            const contractingOffice = toTitleCase(contract['Contracting Office'] || contract['awarding_office_name']) || 'N/A';
             
             // Period of performance
+            const dateSigned = contract['Date Signed'] || 'N/A';
             const popStart = contract['Period of Performance Start Date'] || contract['Start Date'] || 'N/A';
             const popEnd = contract['Period of Performance Current End Date'] || contract['End Date'] || 'N/A';
             const popPotentialEnd = contract['Period of Performance Potential End Date'] || 'N/A';
+            const popLastModified = contract['Last Modified'] || 'N/A';
             
             // Competition data
             const numberOfOffers = contract['Number of Offers Received'] || 'N/A';
@@ -434,31 +1059,28 @@
                     <div class="award-header">
                         <div class="award-id">${awardId}</div>
                         <div class="recipient-name">${recipientName}</div>
-                        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.3);">
-                            <div style="font-size: 13px; opacity: 0.8; margin-bottom: 5px;">ID for USAspending.gov URL:</div>
-                            <div style="font-size: 18px; font-family: monospace; opacity: 0.95; font-weight: 700; word-break: break-all;">${internalId}</div>
+                    </div>
+
+                    <!-- Main Results Header -->
+                    <div class="main-results-header">
+                        <div class="main-results-title">
+                            🏛️ USAspending.gov Results
+                        </div>
+                        <div class="main-results-subtitle">
+                            All data retrieved from USAspending.gov API
                         </div>
                     </div>
 
-                    <!-- Financial Information -->
+                    <!-- Description -->
                     <div class="section">
-                        <div class="section-title">💰 Financial Information</div>
-                        <div class="data-grid">
-                            <div class="data-item">
-                                <div class="data-label">Total Obligation</div>
-                                <div class="data-value amount">$${totalObligation.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                        <div class="section-title">📝 Contract Description</div>
+                        <div class="description-box">
+                            <div class="description-header">
+                                <span class="description-icon">📋</span>
+                                <span class="description-badge">Scope of Work</span>
                             </div>
-                            <div class="data-item">
-                                <div class="data-label">Award Amount</div>
-                                <div class="data-value amount">$${awardAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-label">Potential Award Amount</div>
-                                <div class="data-value amount">$${potentialAwardAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-label">Total Outlays</div>
-                                <div class="data-value amount">$${totalOutlays.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            <div class="description-content">
+                                ${description}
                             </div>
                         </div>
                     </div>
@@ -468,16 +1090,84 @@
                         <div class="section-title">🏛️ Agency Information</div>
                         <div class="data-grid">
                             <div class="data-item">
-                                <div class="data-label">Awarding Agency</div>
-                                <div class="data-value agency">${awardingAgency}</div>
+                                <div class="data-label">
+                                    Awarding Agency (Top-Tier)
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The primary federal department or agency awarding this contract.</div>
+                                <div class="data-value agency">${awardingAgencyTopTier}</div>
                             </div>
                             <div class="data-item">
-                                <div class="data-label">Awarding Sub-Agency</div>
-                                <div class="data-value agency">${awardingSubAgency}</div>
+                                <div class="data-label">
+                                    Funding Agency (Top-Tier)
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The primary federal department or agency providing funds for this contract.</div>
+                                <div class="data-value agency">${fundingAgencyTopTier}</div>
                             </div>
                             <div class="data-item">
-                                <div class="data-label">Funding Agency</div>
-                                <div class="data-value agency">${fundingAgency}</div>
+                                <div class="data-label">
+                                    Contracting Office
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Specific office responsible for procurement actions (e.g., "TAC NJ (36C10B)").</div>
+                                <div class="data-value agency">${contractingOffice}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Awarding Agency (Sub-Tier)
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The specific office or bureau within the awarding agency.</div>
+                                <div class="data-value agency">${awardingAgencySubTier}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Funding Agency (Sub-Tier)
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The specific office or bureau within the funding agency.</div>
+                                <div class="data-value agency">${fundingAgencySubTier}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Financial Information -->
+                    <div class="section">
+                        <div class="section-title">💰 Financial Information</div>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Potential Contract Ceiling
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Communicates maximum possible value without jargon.</div>
+                                <div class="data-value amount">$${potentialAwardAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Current Contract Value
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Common industry phrasing; shows what's been exercised so far.</div>
+                                ${potentialAwardAmount > 0 ? `<div class="percentage-badge">${Math.round((awardAmount / potentialAwardAmount) * 100)}%</div>` : ''}
+                                <div class="data-value amount">$${awardAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Total Award Obligations
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Reflects the full obligated value across all transactions.</div>
+                                <div class="data-value amount">$${totalObligation.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Funds Spent (Outlays)
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Short, readable, and accurate.</div>
+                                <div class="data-value amount">$${totalOutlays.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
                             </div>
                         </div>
                     </div>
@@ -485,18 +1175,64 @@
                     <!-- Period of Performance -->
                     <div class="section">
                         <div class="section-title">📅 Period of Performance</div>
-                        <div class="data-grid">
+                        <div class="data-grid pop-grid">
                             <div class="data-item">
-                                <div class="data-label">Start Date</div>
+                                <div class="data-label">
+                                    Award Signed Date
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The official date when the contract, order, or grant was executed and became legally binding. Typically marks the start of the award lifecycle.</div>
+                                <div class="data-value">${dateSigned}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Performance Start Date
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The date work under the award officially begins. Usually the same or shortly after the signed date.</div>
                                 <div class="data-value">${popStart}</div>
                             </div>
                             <div class="data-item">
-                                <div class="data-label">Current End Date</div>
+                                <div class="data-label">
+                                    Current End Date
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The current scheduled end date for the performance period, reflecting all exercised options or extensions to date. Pulled from the latest transaction or modification in FPDS (for contracts) or FABS (for assistance) that updates the performance period.</div>
+                                ${(() => {
+                                    const days = calculateDaysDifference(popEnd);
+                                    if (days !== null) {
+                                        const absDay = Math.abs(days);
+                                        const label = days > 0 ? `${days} days` : days < 0 ? `${absDay} days ago` : 'Today';
+                                        return `<div class="days-badge">${label}</div>`;
+                                    }
+                                    return '';
+                                })()}
                                 <div class="data-value">${popEnd}</div>
                             </div>
                             <div class="data-item">
-                                <div class="data-label">Potential End Date</div>
+                                <div class="data-label">
+                                    Potential End Date (All Options)
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The maximum possible completion date if all contract or grant options are exercised. This is the contractual ceiling date authorized under the full terms of the award.</div>
+                                ${(() => {
+                                    const days = calculateDaysDifference(popPotentialEnd);
+                                    if (days !== null) {
+                                        const absDay = Math.abs(days);
+                                        const label = days > 0 ? `${days} days` : days < 0 ? `${absDay} days ago` : 'Today';
+                                        return `<div class="days-badge">${label}</div>`;
+                                    }
+                                    return '';
+                                })()}
                                 <div class="data-value">${popPotentialEnd}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Last Modified Date
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The most recent date the award record was updated in USAspending or FPDS/FABS. Indicates data refresh or modification timing.</div>
+                                <div class="data-value">${popLastModified}</div>
                             </div>
                         </div>
                     </div>
@@ -528,34 +1264,72 @@
                         </div>
                     </div>
 
-                    <!-- Description -->
+                    <!-- Subcontractor Information -->
                     <div class="section">
-                        <div class="section-title">📝 Contract Description</div>
-                        <div class="description-box">
-                            ${description}
+                        <div class="section-header-row">
+                            <div class="section-title">
+                                🔗 Subcontractor Information
+                                <span class="section-count-badge" id="subawardCountBadge" style="display: none;"></span>
+                            </div>
+                            <div>
+                                <button class="toggle-rows-btn" onclick="toggleSubawardRows()" id="toggleSubawardRowsBtn" style="display: none;">
+                                    Show All
+                                </button>
+                                <button class="download-excel-btn" onclick="downloadSubawardsExcel()" id="downloadSubawardsBtn" style="display: none;">
+                                    📥 Download Excel
+                                </button>
+                            </div>
+                        </div>
+                        <div id="subcontractorTableContainer">
+                            <div class="loading-message">Loading subcontractor data...</div>
+                        </div>
+                    </div>
+
+                    <!-- Transaction Information -->
+                    <div class="section">
+                        <div class="section-header-row">
+                            <div class="section-title">💸 Transaction Information</div>
+                            <div>
+                                <button class="toggle-rows-btn" onclick="toggleTransactionRows()" id="toggleTransactionRowsBtn" style="display: none;">
+                                    Show All
+                                </button>
+                                <button class="download-excel-btn" onclick="downloadTransactionsExcel()" id="downloadTransactionsBtn" style="display: none;">
+                                    📥 Download Excel
+                                </button>
+                            </div>
+                        </div>
+                        <div id="transactionsTableContainer">
+                            <div class="loading-message">Loading transaction data...</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Raw JSON Data -->
-                <div class="raw-json-section">
+                <!-- Developer Corner Toggle -->
+                <div class="developer-corner-toggle">
+                    <button class="toggle-dev-corner-btn" onclick="toggleDeveloperCorner()">
+                        🔓 Show Developer Corner
+                    </button>
+                </div>
+
+                <!-- Developer Corner -->
+                <div class="developer-corner" id="developerCorner">
+                    <div class="developer-corner-header">
+                        <div class="developer-corner-title">👨‍💻 Developer Corner</div>
+                        <div class="developer-corner-subtitle">Raw API responses for technical analysis and debugging</div>
+                    </div>
+
+                    <!-- Raw JSON Data -->
+                    <div class="raw-json-section">
                     <div class="raw-json-header">
-                        <div class="raw-json-title">🔧 Raw API Data (JSON)</div>
+                        <div class="raw-json-title">🔧 USAspending API</div>
                         <button class="copy-json-btn" onclick="copyRawJson()">📋 Copy JSON</button>
                     </div>
                     
                     <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 3px solid #2196f3;">
-                        <div style="font-size: 14px; font-weight: 600; color: #1976d2; margin-bottom: 8px;">
+                        <div style="font-size: 14px; font-weight: 600; color: #1976d2; margin-bottom: 12px;">
                             Data Source:
                         </div>
-                        <div style="background: #fff3e0; padding: 12px; border-radius: 6px; border-left: 3px solid #ff9800; margin-bottom: 8px;">
-                            <div style="font-size: 13px; font-weight: 600; color: #e65100; margin-bottom: 4px;">
-                                📊 From Search Results (SessionStorage)
-                            </div>
-                            <div style="font-size: 12px; color: #666;">
-                                This data was retrieved from the search API and stored locally.
-                            </div>
-                        </div>
+                        
                         <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
                             <span style="background: #4caf50; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 700;">
                                 POST
@@ -564,8 +1338,9 @@
                                 https://api.usaspending.gov/api/v2/search/spending_by_award/
                             </code>
                         </div>
-                        <div style="font-size: 12px; color: #666;">
-                            Original search: <strong>${awardId}</strong>
+                        
+                        <div style="font-size: 12px; color: #666; margin-top: 8px;">
+                            This data comes from the search results.
                         </div>
                     </div>
                     
@@ -573,69 +1348,150 @@
                         <pre id="rawJsonData">${JSON.stringify(contract, null, 2)}</pre>
                     </div>
                 </div>
+
+                <!-- Transactions API Data -->
+                <div class="raw-json-section" id="transactionsSection">
+                    <div class="raw-json-header">
+                        <div class="raw-json-title">💸 Transactions Data (JSON)</div>
+                        <button class="copy-json-btn" onclick="copyTransactionsJson()">📋 Copy JSON</button>
+                    </div>
+                    
+                    <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 3px solid #ff9800;">
+                        <div style="font-size: 14px; font-weight: 600; color: #e65100; margin-bottom: 12px;">
+                            API Endpoint Called:
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
+                            <span style="background: #4caf50; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">
+                                POST
+                            </span>
+                            <code style="flex: 1; background: white; padding: 8px 12px; border-radius: 4px; font-size: 13px; color: #333; word-break: break-all;">
+                                https://api.usaspending.gov/api/v2/transactions/
+                            </code>
+                        </div>
+                        
+                        <div style="font-size: 12px; color: #666; margin-bottom: 8px;">
+                            <strong>Request Body:</strong> { "award_id": "<span style="font-family: monospace;">${internalId}</span>", "page": 1, "limit": 1000, "sort": "modification_number", "order": "desc" }
+                        </div>
+                        <div style="font-size: 12px; color: #666;">
+                            Award: <strong>${awardId}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="json-container">
+                        <pre id="transactionsJsonData">Loading...</pre>
+                    </div>
+                </div>
+
+                <!-- Sub-Awards API Data -->
+                <div class="raw-json-section" id="subawardsSection">
+                    <div class="raw-json-header">
+                        <div class="raw-json-title">🔗 Sub-Awards Data (JSON)</div>
+                        <button class="copy-json-btn" onclick="copySubawardsJson()">📋 Copy JSON</button>
+                    </div>
+                    
+                    <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 3px solid #9c27b0;">
+                        <div style="font-size: 14px; font-weight: 600; color: #6a1b9a; margin-bottom: 12px;">
+                            API Endpoint Called:
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
+                            <span style="background: #9c27b0; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">
+                                POST
+                            </span>
+                            <code style="flex: 1; background: white; padding: 8px 12px; border-radius: 4px; font-size: 13px; color: #333; word-break: break-all;">
+                                https://api.usaspending.gov/api/v2/subawards/
+                            </code>
+                        </div>
+                        
+                        <div style="font-size: 12px; color: #666;">
+                            Filtering by award ID: <strong>${awardId}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="json-container">
+                        <pre id="subawardsJsonData">Loading...</pre>
+                    </div>
+                </div>
+                </div>
             `;
+            
+            // Load transactions data using internal ID
+            loadTransactionsData(internalId, awardId);
+            
+            // Load sub-awards data for search results view
+            loadSubawardsData(awardId, internalId);
         }
 
-        function displayAwardDetails(data) {
+        function displayAwardDetails(data, displayAwardId) {
             const container = document.getElementById('detailContainer');
             
             // Extract metadata from our custom fields
             const apiEndpoint = data._api_endpoint || 'N/A';
-            const searchEndpoint = data._search_endpoint || 'N/A';
-            const generatedInternalId = data._generated_internal_id || 'N/A';
-            const originalAwardId = data._award_id || 'N/A';
+            const generatedInternalId = data._award_id || data.generated_unique_award_id || 'N/A';
             
-            const awardId = data.piid || data.fain || data.uri || originalAwardId;
+            const awardId = displayAwardId || data.piid || data.fain || data.uri || 'N/A';
             const recipientName = data.recipient?.recipient_name || 'Unknown';
             const description = data.description || 'No description available';
             
-            // Financial data
+            // Financial data from awards API
+            const baseExercisedOptionsValue = data.base_exercised_options || 0;
+            const baseAndAllOptionsValue = data.base_and_all_options || 0;
+            const totalAccountObligation = data.total_account_obligation || 0;
+            const totalAccountOutlay = data.total_account_outlay || 0;
+            const totalSubawardAmount = data.total_subaward_amount || 0;
+            const subawardCount = data.subaward_count || 0;
             const totalObligation = data.total_obligation || 0;
-            const baseAndAllOptionsValue = data.base_and_all_options_value || 0;
-            const baseExercisedOptionsValue = data.base_exercised_options_val || 0;
             
             // Agency data
-            const awardingAgency = data.awarding_agency?.toptier_agency?.name || 'N/A';
-            const awardingSubAgency = data.awarding_agency?.subtier_agency?.name || 'N/A';
-            const fundingAgency = data.funding_agency?.toptier_agency?.name || 'N/A';
+            const awardingAgencyTopTier = toTitleCase(data.awarding_agency?.toptier_agency?.name) || 'N/A';
+            const awardingAgencySubTier = toTitleCase(data.awarding_agency?.subtier_agency?.name) || 'N/A';
+            const fundingAgencyTopTier = toTitleCase(data.funding_agency?.toptier_agency?.name) || 'N/A';
+            const fundingAgencySubTier = toTitleCase(data.funding_agency?.subtier_agency?.name) || 'N/A';
+            const contractingOffice = toTitleCase(data.awarding_agency?.office_agency_name) || 'N/A';
             
-            // Period of performance
-            const popStart = data.period_of_performance_start_date || 'N/A';
-            const popEnd = data.period_of_performance_current_end_date || 'N/A';
-            const popPotentialEnd = data.period_of_performance_potential_end_date || 'N/A';
+            // Period of performance from awards API
+            const perfPeriod = data.period_of_performance || {};
+            const dateSigned = data.date_signed || 'N/A';
+            const popStart = perfPeriod.start_date || 'N/A';
+            const popEnd = perfPeriod.end_date || 'N/A';
+            const popPotentialEnd = perfPeriod.potential_end_date || 'N/A';
+            const popLastModified = perfPeriod.last_modified_date || 'N/A';
             
-            // Competition data
-            const solicitationProcedures = data.type_of_contract_pricing || 'N/A';
-            const numberOfOffers = data.number_of_offers_received || 'N/A';
-            const extentCompeted = data.extent_competed || 'N/A';
-            const setAside = data.type_set_aside || 'N/A';
+            // Competition data from latest_transaction_contract_data
+            const contractData = data.latest_transaction_contract_data || {};
+            const solicitationProcedures = contractData.solicitation_procedures_description || contractData.solicitation_procedures || 'N/A';
+            const numberOfOffers = contractData.number_of_offers_received || 'N/A';
+            const extentCompeted = contractData.extent_competed_description || contractData.extent_competed || 'N/A';
+            const setAside = contractData.type_set_aside_description || contractData.type_set_aside || 'N/A';
             
             container.innerHTML = `
                 <div class="detail-container">
                     <div class="award-header">
                         <div class="award-id">${awardId}</div>
                         <div class="recipient-name">${recipientName}</div>
-                        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.3);">
-                            <div style="font-size: 13px; opacity: 0.8; margin-bottom: 5px;">Generated Internal ID (for USAspending.gov URL):</div>
-                            <div style="font-size: 16px; font-family: monospace; opacity: 0.95; font-weight: 700; word-break: break-all;">${generatedInternalId}</div>
+                    </div>
+
+                    <!-- Main Results Header -->
+                    <div class="main-results-header">
+                        <div class="main-results-title">
+                            🏛️ USAspending.gov Results
+                        </div>
+                        <div class="main-results-subtitle">
+                            All data retrieved from USAspending.gov API
                         </div>
                     </div>
 
-                    <!-- Financial Information -->
+                    <!-- Description -->
                     <div class="section">
-                        <div class="section-title">💰 Financial Information</div>
-                        <div class="data-grid">
-                            <div class="data-item">
-                                <div class="data-label">Total Obligation</div>
-                                <div class="data-value amount">$${totalObligation.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                        <div class="section-title">📝 Contract Description</div>
+                        <div class="description-box">
+                            <div class="description-header">
+                                <span class="description-icon">📋</span>
+                                <span class="description-badge">Scope of Work</span>
                             </div>
-                            <div class="data-item">
-                                <div class="data-label">Base & All Options Value</div>
-                                <div class="data-value amount">$${baseAndAllOptionsValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-label">Base Exercised Options</div>
-                                <div class="data-value amount">$${baseExercisedOptionsValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            <div class="description-content">
+                                ${description}
                             </div>
                         </div>
                     </div>
@@ -645,16 +1501,101 @@
                         <div class="section-title">🏛️ Agency Information</div>
                         <div class="data-grid">
                             <div class="data-item">
-                                <div class="data-label">Awarding Agency</div>
-                                <div class="data-value agency">${awardingAgency}</div>
+                                <div class="data-label">
+                                    Awarding Agency (Top-Tier)
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The primary federal department or agency awarding this contract.</div>
+                                <div class="data-value agency">${awardingAgencyTopTier}</div>
                             </div>
                             <div class="data-item">
-                                <div class="data-label">Awarding Sub-Agency</div>
-                                <div class="data-value agency">${awardingSubAgency}</div>
+                                <div class="data-label">
+                                    Funding Agency (Top-Tier)
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The primary federal department or agency providing funds for this contract.</div>
+                                <div class="data-value agency">${fundingAgencyTopTier}</div>
                             </div>
                             <div class="data-item">
-                                <div class="data-label">Funding Agency</div>
-                                <div class="data-value agency">${fundingAgency}</div>
+                                <div class="data-label">
+                                    Contracting Office
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Specific office responsible for procurement actions (e.g., "TAC NJ (36C10B)").</div>
+                                <div class="data-value agency">${contractingOffice}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Awarding Agency (Sub-Tier)
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The specific office or bureau within the awarding agency.</div>
+                                <div class="data-value agency">${awardingAgencySubTier}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Funding Agency (Sub-Tier)
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The specific office or bureau within the funding agency.</div>
+                                <div class="data-value agency">${fundingAgencySubTier}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Financial Information -->
+                    <div class="section">
+                        <div class="section-title">💰 Financial Information</div>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Potential Contract Ceiling
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Communicates maximum possible value without jargon.</div>
+                                <div class="data-value amount">$${baseAndAllOptionsValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Current Contract Value
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Common industry phrasing; shows what's been exercised so far.</div>
+                                ${baseAndAllOptionsValue > 0 ? `<div class="percentage-badge">${Math.round((baseExercisedOptionsValue / baseAndAllOptionsValue) * 100)}%</div>` : ''}
+                                <div class="data-value amount">$${baseExercisedOptionsValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Total Award Obligations
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Reflects the full obligated value across all transactions.</div>
+                                <div class="data-value amount">$${totalObligation.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Total Sub-Award Value
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Summarizes financial magnitude of downstream awards.</div>
+                                ${subawardCount > 0 ? `<div class="count-badge">${subawardCount}</div>` : ''}
+                                <div class="data-value amount">$${totalSubawardAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Funds Obligated (from Accounts)
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Makes it clear this comes from Treasury accounts, not just award docs.</div>
+                                <div class="data-value amount">$${totalAccountObligation.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Funds Spent (Outlays)
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Short, readable, and accurate.</div>
+                                <div class="data-value amount">$${totalAccountOutlay.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
                             </div>
                         </div>
                     </div>
@@ -662,18 +1603,64 @@
                     <!-- Period of Performance -->
                     <div class="section">
                         <div class="section-title">📅 Period of Performance</div>
-                        <div class="data-grid">
+                        <div class="data-grid pop-grid">
                             <div class="data-item">
-                                <div class="data-label">Start Date</div>
+                                <div class="data-label">
+                                    Award Signed Date
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The official date when the contract, order, or grant was executed and became legally binding. Typically marks the start of the award lifecycle.</div>
+                                <div class="data-value">${dateSigned}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Performance Start Date
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The date work under the award officially begins. Usually the same or shortly after the signed date.</div>
                                 <div class="data-value">${popStart}</div>
                             </div>
                             <div class="data-item">
-                                <div class="data-label">Current End Date</div>
+                                <div class="data-label">
+                                    Current End Date
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The current scheduled end date for the performance period, reflecting all exercised options or extensions to date. Pulled from the latest transaction or modification in FPDS (for contracts) or FABS (for assistance) that updates the performance period.</div>
+                                ${(() => {
+                                    const days = calculateDaysDifference(popEnd);
+                                    if (days !== null) {
+                                        const absDay = Math.abs(days);
+                                        const label = days > 0 ? `${days} days` : days < 0 ? `${absDay} days ago` : 'Today';
+                                        return `<div class="days-badge">${label}</div>`;
+                                    }
+                                    return '';
+                                })()}
                                 <div class="data-value">${popEnd}</div>
                             </div>
                             <div class="data-item">
-                                <div class="data-label">Potential End Date</div>
+                                <div class="data-label">
+                                    Potential End Date (All Options)
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The maximum possible completion date if all contract or grant options are exercised. This is the contractual ceiling date authorized under the full terms of the award.</div>
+                                ${(() => {
+                                    const days = calculateDaysDifference(popPotentialEnd);
+                                    if (days !== null) {
+                                        const absDay = Math.abs(days);
+                                        const label = days > 0 ? `${days} days` : days < 0 ? `${absDay} days ago` : 'Today';
+                                        return `<div class="days-badge">${label}</div>`;
+                                    }
+                                    return '';
+                                })()}
                                 <div class="data-value">${popPotentialEnd}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Last Modified Date
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">The most recent date the award record was updated in USAspending or FPDS/FABS. Indicates data refresh or modification timing.</div>
+                                <div class="data-value">${popLastModified}</div>
                             </div>
                         </div>
                     </div>
@@ -701,57 +1688,83 @@
                         </div>
                     </div>
 
-                    <!-- Description -->
+                    <!-- Subcontractor Information -->
                     <div class="section">
-                        <div class="section-title">📝 Contract Description</div>
-                        <div class="description-box">
-                            ${description}
+                        <div class="section-header-row">
+                            <div class="section-title">
+                                🔗 Subcontractor Information
+                                <span class="section-count-badge" id="subawardCountBadge" style="display: none;"></span>
+                            </div>
+                            <div>
+                                <button class="toggle-rows-btn" onclick="toggleSubawardRows()" id="toggleSubawardRowsBtn" style="display: none;">
+                                    Show All
+                                </button>
+                                <button class="download-excel-btn" onclick="downloadSubawardsExcel()" id="downloadSubawardsBtn" style="display: none;">
+                                    📥 Download Excel
+                                </button>
+                            </div>
+                        </div>
+                        <div id="subcontractorTableContainer">
+                            <div class="loading-message">Loading subcontractor data...</div>
+                        </div>
+                    </div>
+
+                    <!-- Transaction Information -->
+                    <div class="section">
+                        <div class="section-header-row">
+                            <div class="section-title">💸 Transaction Information</div>
+                            <div>
+                                <button class="toggle-rows-btn" onclick="toggleTransactionRows()" id="toggleTransactionRowsBtn" style="display: none;">
+                                    Show All
+                                </button>
+                                <button class="download-excel-btn" onclick="downloadTransactionsExcel()" id="downloadTransactionsBtn" style="display: none;">
+                                    📥 Download Excel
+                                </button>
+                            </div>
+                        </div>
+                        <div id="transactionsTableContainer">
+                            <div class="loading-message">Loading transaction data...</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Raw JSON Data -->
-                <div class="raw-json-section">
+                <!-- Developer Corner Toggle -->
+                <div class="developer-corner-toggle">
+                    <button class="toggle-dev-corner-btn" onclick="toggleDeveloperCorner()">
+                        🔓 Show Developer Corner
+                    </button>
+                </div>
+
+                <!-- Developer Corner -->
+                <div class="developer-corner" id="developerCorner">
+                    <div class="developer-corner-header">
+                        <div class="developer-corner-title">👨‍💻 Developer Corner</div>
+                        <div class="developer-corner-subtitle">Raw API responses for technical analysis and debugging</div>
+                    </div>
+
+                    <!-- Raw JSON Data -->
+                    <div class="raw-json-section">
                     <div class="raw-json-header">
-                        <div class="raw-json-title">🔧 Raw API Data (JSON)</div>
+                        <div class="raw-json-title">🔧 USAspending API</div>
                         <button class="copy-json-btn" onclick="copyRawJson()">📋 Copy JSON</button>
                     </div>
                     
                     <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 3px solid #2196f3;">
                         <div style="font-size: 14px; font-weight: 600; color: #1976d2; margin-bottom: 12px;">
-                            API Call Flow (Two-Step Process):
+                            API Endpoint Called:
                         </div>
                         
-                        <div style="background: white; padding: 12px; border-radius: 6px; margin-bottom: 10px;">
-                            <div style="font-size: 12px; font-weight: 600; color: #666; margin-bottom: 6px;">
-                                Step 1: Resolve Award ID to Generated Internal ID
-                            </div>
-                            <div style="display: flex; gap: 10px; align-items: center;">
-                                <span style="background: #4caf50; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">
-                                    POST
-                                </span>
-                                <code style="flex: 1; background: #f5f5f5; padding: 6px 10px; border-radius: 4px; font-size: 12px; color: #333; word-break: break-all;">
-                                    ${searchEndpoint}
-                                </code>
-                            </div>
+                        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
+                            <span style="background: #2196f3; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">
+                                GET
+                            </span>
+                            <code style="flex: 1; background: white; padding: 8px 12px; border-radius: 4px; font-size: 13px; color: #333; word-break: break-all;">
+                                ${apiEndpoint}
+                            </code>
                         </div>
                         
-                        <div style="background: white; padding: 12px; border-radius: 6px;">
-                            <div style="font-size: 12px; font-weight: 600; color: #666; margin-bottom: 6px;">
-                                Step 2: Get Full Award Details
-                            </div>
-                            <div style="display: flex; gap: 10px; align-items: center;">
-                                <span style="background: #2196f3; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">
-                                    GET
-                                </span>
-                                <code style="flex: 1; background: #f5f5f5; padding: 6px 10px; border-radius: 4px; font-size: 12px; color: #333; word-break: break-all;">
-                                    ${apiEndpoint}
-                                </code>
-                            </div>
-                        </div>
-                        
-                        <div style="font-size: 12px; color: #666; margin-top: 10px;">
-                            Generated Internal ID: <strong>${generatedInternalId}</strong>
+                        <div style="font-size: 12px; color: #666;">
+                            Using generated_unique_award_id: <strong>${generatedInternalId}</strong>
                         </div>
                     </div>
                     
@@ -759,20 +1772,124 @@
                         <pre id="rawJsonData">${JSON.stringify(data, null, 2)}</pre>
                     </div>
                 </div>
+
+                <!-- Transactions API Data -->
+                <div class="raw-json-section" id="transactionsSection">
+                    <div class="raw-json-header">
+                        <div class="raw-json-title">💸 Transactions Data (JSON)</div>
+                        <button class="copy-json-btn" onclick="copyTransactionsJson()">📋 Copy JSON</button>
+                    </div>
+                    
+                    <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 3px solid #ff9800;">
+                        <div style="font-size: 14px; font-weight: 600; color: #e65100; margin-bottom: 12px;">
+                            API Endpoint Called:
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
+                            <span style="background: #4caf50; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">
+                                POST
+                            </span>
+                            <code style="flex: 1; background: white; padding: 8px 12px; border-radius: 4px; font-size: 13px; color: #333; word-break: break-all;">
+                                https://api.usaspending.gov/api/v2/transactions/
+                            </code>
+                        </div>
+                        
+                        <div style="font-size: 12px; color: #666; margin-bottom: 8px;">
+                            <strong>Request Body:</strong> { "award_id": "<span style="font-family: monospace;">${generatedInternalId}</span>", "page": 1, "limit": 1000, "sort": "modification_number", "order": "desc" }
+                        </div>
+                        <div style="font-size: 12px; color: #666;">
+                            Award: <strong>${awardId}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="json-container">
+                        <pre id="transactionsJsonData">Loading...</pre>
+                    </div>
+                </div>
+
+                <!-- Sub-Awards API Data -->
+                <div class="raw-json-section" id="subawardsSection">
+                    <div class="raw-json-header">
+                        <div class="raw-json-title">🔗 Sub-Awards Data (JSON)</div>
+                        <button class="copy-json-btn" onclick="copySubawardsJson()">📋 Copy JSON</button>
+                    </div>
+                    
+                    <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 3px solid #9c27b0;">
+                        <div style="font-size: 14px; font-weight: 600; color: #6a1b9a; margin-bottom: 12px;">
+                            API Endpoint Called:
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
+                            <span style="background: #9c27b0; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">
+                                POST
+                            </span>
+                            <code style="flex: 1; background: white; padding: 8px 12px; border-radius: 4px; font-size: 13px; color: #333; word-break: break-all;">
+                                https://api.usaspending.gov/api/v2/subawards/
+                            </code>
+                        </div>
+                        
+                        <div style="font-size: 12px; color: #666;">
+                            Filtering by award ID: <strong>${awardId}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="json-container">
+                        <pre id="subawardsJsonData">Loading...</pre>
+                    </div>
+                </div>
+                </div>
             `;
             
             // Update external links sidebar
-            updateExternalLinks(awardId, generatedInternalId);
+            updateExternalLinks(awardId, generatedInternalId, generatedInternalId);
+            
+            // Update subaward count badge
+            const subawardBadge = document.getElementById('subawardCountBadge');
+            if (subawardBadge && subawardCount > 0) {
+                subawardBadge.textContent = `${subawardCount} Sub-Awards`;
+                subawardBadge.style.display = 'inline-flex';
+            }
+            
+            // Load transactions data using internal ID
+            loadTransactionsData(generatedInternalId, awardId);
+            
+            // Load sub-awards data
+            loadSubawardsData(awardId, generatedInternalId);
         }
 
-        function updateExternalLinks(awardId, urlId) {
+        function updateOppIdBox(contract) {
+            const oppIdContainer = document.getElementById('oppIdContainer');
+            
+            const internalId = contract['internal_id'] || 'N/A';
+            const awardId = contract['Award ID'] || 'N/A';
+            const generatedInternalId = contract['generated_internal_id'] || 'N/A';
+            
+            oppIdContainer.innerHTML = `
+                <div style="background: #f5f7fa; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
+                    <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">INTERNAL ID</div>
+                    <div style="font-size: 16px; color: #333; font-weight: 700; font-family: monospace;">${internalId}</div>
+                </div>
+                
+                <div style="background: #f5f7fa; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
+                    <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">AWARD ID</div>
+                    <div style="font-size: 14px; color: #667eea; font-weight: 700; font-family: monospace; word-break: break-all;">${awardId}</div>
+                </div>
+                
+                <div style="background: #f5f7fa; padding: 12px; border-radius: 8px;">
+                    <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">GENERATED INTERNAL ID</div>
+                    <div style="font-size: 12px; color: #333; font-weight: 600; font-family: monospace; word-break: break-all; line-height: 1.4;">${generatedInternalId}</div>
+                </div>
+            `;
+        }
+
+        function updateExternalLinks(awardId, urlId, generatedUniqueAwardId) {
             const linksContainer = document.getElementById('externalLinksContainer');
             
             // Construct USAspending.gov URL
-            // Use the provided ID (generated_unique_award_id or fallback)
+            // Use urlId if available, fallback to generated_unique_award_id
             const usaspendingUrl = urlId 
                 ? 'https://www.usaspending.gov/award/' + encodeURIComponent(urlId)
-                : 'https://www.usaspending.gov/award/' + encodeURIComponent(awardId);
+                : 'https://www.usaspending.gov/award/' + encodeURIComponent(generatedUniqueAwardId || awardId);
             
             if (usaspendingUrl) {
                 linksContainer.innerHTML = `
@@ -873,6 +1990,606 @@
             } catch (err) {
                 console.error('Fallback copy failed:', err);
                 alert('Failed to copy JSON');
+            }
+        }
+
+        async function loadTransactionsData(internalId, displayAwardId) {
+            try {
+                console.log('💸 Calling transactions API with internal ID:', internalId);
+                console.log('💸 Display Award ID:', displayAwardId);
+                
+                // Correct endpoint: POST /api/v2/transactions/ with award_id in body
+                const response = await fetch('https://api.usaspending.gov/api/v2/transactions/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        award_id: internalId,
+                        page: 1,
+                        limit: 1000,
+                        sort: "modification_number",
+                        order: "desc"
+                    })
+                });
+                
+                const data = await response.json();
+
+                if (response.ok) {
+                    console.log('✅ Transactions API data received');
+                    const resultCount = data.results ? data.results.length : 0;
+                    const totalCount = data.page_metadata?.total || resultCount;
+                    
+                    // Display transactions as a table
+                    displayTransactionsTable(data.results || []);
+                    
+                    // Update JSON section
+                    document.getElementById('transactionsJsonData').textContent = JSON.stringify(data, null, 2);
+                    
+                    // Update the info text with result count
+                    const transactionsSection = document.querySelector('#transactionsSection');
+                    if (transactionsSection) {
+                        const infoDiv = transactionsSection.querySelector('.json-container').previousElementSibling.querySelector('div:last-child');
+                        if (infoDiv) {
+                            infoDiv.innerHTML = `Found <strong>${totalCount}</strong> total transactions (<strong>${resultCount}</strong> shown) for award: <strong>${displayAwardId}</strong>`;
+                        }
+                    }
+                } else {
+                    const errorMsg = data.detail || data.message || data.error || 'Failed to load transactions data';
+                    document.getElementById('transactionsTableContainer').innerHTML = `<div class="no-data-message">Error: ${errorMsg}</div>`;
+                    document.getElementById('transactionsJsonData').textContent = `Error: ${errorMsg}\n\nResponse: ${JSON.stringify(data, null, 2)}`;
+                }
+            } catch (error) {
+                console.error('Transactions API error:', error);
+                document.getElementById('transactionsTableContainer').innerHTML = `<div class="no-data-message">Error loading transactions: ${error.message}</div>`;
+                document.getElementById('transactionsJsonData').textContent = `Error: ${error.message}`;
+            }
+        }
+
+        function displayTransactionsTable(transactions) {
+            const container = document.getElementById('transactionsTableContainer');
+            
+            if (!transactions || transactions.length === 0) {
+                container.innerHTML = '<div class="no-data-message">No transactions found for this contract.</div>';
+                return;
+            }
+
+            let tableHTML = `
+                <table class="subcontractor-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Mod Number</th>
+                            <th>Action</th>
+                            <th>Action Date</th>
+                            <th>Amount</th>
+                            <th>
+                                Description
+                                <button class="toggle-desc-btn" onclick="toggleAllDescriptions(event)">Expand All</button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            transactions.forEach((txn, index) => {
+                const modNumber = txn.modification_number || '0';
+                const actionType = txn.action_type || '';
+                const actionDesc = txn.action_type_description || '';
+                const action = actionType && actionDesc ? `${actionType}: ${actionDesc}` : (actionType || actionDesc || 'N/A');
+                const actionDate = txn.action_date || 'N/A';
+                const amount = parseFloat(txn.federal_action_obligation) || 0;
+                const description = txn.description || 'N/A';
+                const truncatedDesc = description.length > 80 ? description.substring(0, 80) + '...' : description;
+                const hiddenClass = index >= 5 ? ' hidden-row' : '';
+                
+                tableHTML += `
+                    <tr class="${hiddenClass}">
+                        <td>${index + 1}</td>
+                        <td>${modNumber}</td>
+                        <td>${action}</td>
+                        <td>${actionDate}</td>
+                        <td class="amount">$${amount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="description-cell truncated" onclick="toggleDescription(this)" data-full="${description.replace(/"/g, '&quot;')}">${truncatedDesc}</td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+
+            container.innerHTML = tableHTML;
+            
+            // Show the download button
+            const downloadBtn = document.getElementById('downloadTransactionsBtn');
+            if (downloadBtn) {
+                downloadBtn.style.display = 'inline-flex';
+            }
+            
+            // Show the toggle button if there are more than 5 rows
+            const toggleBtn = document.getElementById('toggleTransactionRowsBtn');
+            if (toggleBtn && transactions.length > 5) {
+                toggleBtn.style.display = 'inline-block';
+                toggleBtn.textContent = 'Show All (' + transactions.length + ')';
+            }
+            
+            // Store the data for Excel export
+            window.currentTransactions = transactions;
+        }
+
+        function toggleDescription(cell) {
+            const fullText = cell.getAttribute('data-full');
+            const isExpanded = cell.classList.contains('expanded');
+            
+            if (isExpanded) {
+                // Collapse - show truncated version
+                const truncated = fullText.length > 80 ? fullText.substring(0, 80) + '...' : fullText;
+                cell.textContent = truncated;
+                cell.classList.remove('expanded');
+                cell.classList.add('truncated');
+            } else {
+                // Expand - show full text
+                cell.textContent = fullText;
+                cell.classList.remove('truncated');
+                cell.classList.add('expanded');
+            }
+        }
+
+        function toggleAllDescriptions(event) {
+            event.stopPropagation();
+            const btn = event.target;
+            const cells = document.querySelectorAll('#transactionsTableContainer .description-cell');
+            const isExpandAll = btn.textContent === 'Expand All';
+            
+            cells.forEach(cell => {
+                const fullText = cell.getAttribute('data-full');
+                
+                if (isExpandAll) {
+                    // Expand all
+                    cell.textContent = fullText;
+                    cell.classList.remove('truncated');
+                    cell.classList.add('expanded');
+                } else {
+                    // Collapse all
+                    const truncated = fullText.length > 80 ? fullText.substring(0, 80) + '...' : fullText;
+                    cell.textContent = truncated;
+                    cell.classList.remove('expanded');
+                    cell.classList.add('truncated');
+                }
+            });
+            
+            btn.textContent = isExpandAll ? 'Collapse All' : 'Expand All';
+        }
+
+        function toggleAllSubawardDescriptions(event) {
+            event.stopPropagation();
+            const btn = event.target;
+            const cells = document.querySelectorAll('#subcontractorTableContainer .description-cell');
+            const isExpandAll = btn.textContent === 'Expand All';
+            
+            cells.forEach(cell => {
+                const fullText = cell.getAttribute('data-full');
+                
+                if (isExpandAll) {
+                    // Expand all
+                    cell.textContent = fullText;
+                    cell.classList.remove('truncated');
+                    cell.classList.add('expanded');
+                } else {
+                    // Collapse all
+                    const truncated = fullText.length > 80 ? fullText.substring(0, 80) + '...' : fullText;
+                    cell.textContent = truncated;
+                    cell.classList.remove('expanded');
+                    cell.classList.add('truncated');
+                }
+            });
+            
+            btn.textContent = isExpandAll ? 'Collapse All' : 'Expand All';
+        }
+
+        function toggleTransactionRows() {
+            const btn = document.getElementById('toggleTransactionRowsBtn');
+            const rows = document.querySelectorAll('#transactionsTableContainer .hidden-row');
+            const isShowAll = btn.textContent.startsWith('Show All');
+            
+            if (isShowAll) {
+                // Show all rows
+                rows.forEach(row => row.classList.remove('hidden-row'));
+                btn.textContent = 'Show Less';
+            } else {
+                // Hide rows beyond first 5
+                const allRows = document.querySelectorAll('#transactionsTableContainer tbody tr');
+                allRows.forEach((row, index) => {
+                    if (index >= 5) {
+                        row.classList.add('hidden-row');
+                    }
+                });
+                const totalRows = window.currentTransactions ? window.currentTransactions.length : allRows.length;
+                btn.textContent = 'Show All (' + totalRows + ')';
+            }
+        }
+
+        function toggleSubawardRows() {
+            const btn = document.getElementById('toggleSubawardRowsBtn');
+            const rows = document.querySelectorAll('#subcontractorTableContainer .hidden-row');
+            const isShowAll = btn.textContent.startsWith('Show All');
+            
+            if (isShowAll) {
+                // Show all rows
+                rows.forEach(row => row.classList.remove('hidden-row'));
+                btn.textContent = 'Show Less';
+            } else {
+                // Hide rows beyond first 5
+                const allRows = document.querySelectorAll('#subcontractorTableContainer tbody tr');
+                allRows.forEach((row, index) => {
+                    if (index >= 5) {
+                        row.classList.add('hidden-row');
+                    }
+                });
+                const totalRows = window.currentSubawards ? window.currentSubawards.length : allRows.length;
+                btn.textContent = 'Show All (' + totalRows + ')';
+            }
+        }
+
+        function toggleDeveloperCorner() {
+            const corner = document.getElementById('developerCorner');
+            const btn = event.target;
+            
+            if (corner.classList.contains('visible')) {
+                corner.classList.remove('visible');
+                btn.textContent = '🔓 Show Developer Corner';
+            } else {
+                corner.classList.add('visible');
+                btn.textContent = '🔒 Hide Developer Corner';
+            }
+        }
+
+        function downloadTransactionsExcel() {
+            if (!window.currentTransactions || window.currentTransactions.length === 0) {
+                alert('No transaction data available to download.');
+                return;
+            }
+
+            try {
+                // Create CSV content with BOM for Excel compatibility
+                let csvContent = '\uFEFF'; // UTF-8 BOM
+                csvContent += 'No.,Mod Number,Action,Action Date,Amount,Description\n';
+                
+                window.currentTransactions.forEach((txn, index) => {
+                    const modNumber = txn.modification_number || '0';
+                    const actionType = txn.action_type || '';
+                    const actionDesc = txn.action_type_description || '';
+                    const action = (actionType && actionDesc ? `${actionType}: ${actionDesc}` : (actionType || actionDesc || 'N/A')).replace(/"/g, '""');
+                    const actionDate = txn.action_date || 'N/A';
+                    const amount = parseFloat(txn.federal_action_obligation) || 0;
+                    const description = (txn.description || 'N/A').replace(/"/g, '""');
+                    
+                    csvContent += `${index + 1},${modNumber},"${action}",${actionDate},${amount},"${description}"\n`;
+                });
+
+                console.log('CSV Content Size:', csvContent.length, 'bytes');
+                console.log('Number of rows:', window.currentTransactions.length);
+
+                // Create blob and download
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                
+                const awardId = urlParams.get('awardId') || 'contract';
+                link.download = `transactions-${awardId}-${Date.now()}.csv`;
+                
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                
+                console.log('✅ Transactions CSV file downloaded successfully');
+            } catch (error) {
+                console.error('Download error:', error);
+                alert('Failed to download file: ' + error.message);
+            }
+        }
+
+        function copyTransactionsJson() {
+            const jsonText = document.getElementById('transactionsJsonData').textContent;
+            const btn = event.target;
+            const originalText = btn.textContent;
+            
+            // Try modern clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(jsonText).then(() => {
+                    btn.textContent = '✅ Copied!';
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Clipboard API failed:', err);
+                    copyJsonFallback(jsonText, btn, originalText);
+                });
+            } else {
+                copyJsonFallback(jsonText, btn, originalText);
+            }
+        }
+
+        async function loadSubawardsData(awardId, generatedInternalId) {
+            try {
+                console.log('🔗 Calling sub-awards API for:', awardId);
+                
+                const response = await fetch('https://api.usaspending.gov/api/v2/subawards/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        page: 1,
+                        limit: 100,
+                        order: "desc",
+                        sort: "subaward_number",
+                        award_id: generatedInternalId || awardId
+                    })
+                });
+                
+                const data = await response.json();
+
+                if (response.ok) {
+                    console.log('✅ Sub-Awards API data received');
+                    const resultCount = data.results ? data.results.length : 0;
+                    
+                    // Display sub-awards as a table
+                    displaySubawardsTable(data.results || []);
+                    
+                    // Update JSON section
+                    document.getElementById('subawardsJsonData').textContent = JSON.stringify(data, null, 2);
+                    
+                    // Update the info text with result count
+                    const infoDiv = document.querySelector('#subawardsSection .json-container').previousElementSibling;
+                    if (infoDiv) {
+                        infoDiv.querySelector('div:last-child').innerHTML = `Found <strong>${resultCount}</strong> sub-awards for award ID: <strong>${awardId}</strong>`;
+                    }
+                } else {
+                    const errorMsg = data.message || data.error || 'Failed to load sub-awards data';
+                    document.getElementById('subcontractorTableContainer').innerHTML = `<div class="no-data-message">Error: ${errorMsg}</div>`;
+                    document.getElementById('subawardsJsonData').textContent = `Error: ${errorMsg}`;
+                }
+            } catch (error) {
+                console.error('Sub-Awards API error:', error);
+                document.getElementById('subcontractorTableContainer').innerHTML = `<div class="no-data-message">Error loading sub-awards: ${error.message}</div>`;
+                document.getElementById('subawardsJsonData').textContent = `Error: ${error.message}`;
+            }
+        }
+
+        function displaySubawardsTable(subawards) {
+            const container = document.getElementById('subcontractorTableContainer');
+            
+            if (!subawards || subawards.length === 0) {
+                container.innerHTML = '<div class="no-data-message">No sub-awards found for this contract.</div>';
+                return;
+            }
+
+            // Sort by amount - highest first
+            const sortedSubawards = [...subawards].sort((a, b) => {
+                const amountA = parseFloat(a.amount) || 0;
+                const amountB = parseFloat(b.amount) || 0;
+                return amountB - amountA;
+            });
+
+            // Calculate total sub-award amount from the data
+            const totalSubawardAmount = sortedSubawards.reduce((sum, sub) => sum + (parseFloat(sub.amount) || 0), 0);
+
+            let tableHTML = `
+                <table class="subcontractor-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Subawardee Name</th>
+                            <th>Amount</th>
+                            <th>% of Total</th>
+                            <th>Date</th>
+                            <th>
+                                Description
+                                <button class="toggle-desc-btn" onclick="toggleAllSubawardDescriptions(event)">Expand All</button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            sortedSubawards.forEach((sub, index) => {
+                const amount = parseFloat(sub.amount) || 0;
+                const percentage = totalSubawardAmount > 0 ? ((amount / totalSubawardAmount) * 100).toFixed(1) : '0.0';
+                const description = sub.description || 'N/A';
+                const truncatedDesc = description.length > 80 ? description.substring(0, 80) + '...' : description;
+                const hiddenClass = index >= 5 ? ' hidden-row' : '';
+                
+                tableHTML += `
+                    <tr class="${hiddenClass}">
+                        <td>${index + 1}</td>
+                        <td>${sub.recipient_name || sub.subawardee_name || 'N/A'}</td>
+                        <td class="amount">$${amount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="percentage">${percentage}%</td>
+                        <td>${sub.action_date || sub.subaward_date || 'N/A'}</td>
+                        <td class="description-cell truncated" onclick="toggleDescription(this)" data-full="${description.replace(/"/g, '&quot;')}">${truncatedDesc}</td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+
+            container.innerHTML = tableHTML;
+            
+            // Show the download button
+            const downloadBtn = document.getElementById('downloadSubawardsBtn');
+            if (downloadBtn) {
+                downloadBtn.style.display = 'inline-flex';
+            }
+            
+            // Show the toggle button if there are more than 5 rows
+            const toggleBtn = document.getElementById('toggleSubawardRowsBtn');
+            if (toggleBtn && sortedSubawards.length > 5) {
+                toggleBtn.style.display = 'inline-block';
+                toggleBtn.textContent = 'Show All (' + sortedSubawards.length + ')';
+            }
+            
+            // Store the data for Excel export
+            window.currentSubawards = sortedSubawards;
+            window.totalSubawardAmount = totalSubawardAmount;
+        }
+
+        function downloadSubawardsExcel() {
+            if (!window.currentSubawards || window.currentSubawards.length === 0) {
+                alert('No sub-award data available to download. This contract may not have any sub-awards.');
+                return;
+            }
+
+            try {
+                // Create CSV content with BOM for Excel compatibility
+                let csvContent = '\uFEFF'; // UTF-8 BOM
+                csvContent += 'No.,Subawardee Name,Amount,% of Total,Date,Description\n';
+                
+                window.currentSubawards.forEach((sub, index) => {
+                    const amount = parseFloat(sub.amount) || 0;
+                    const percentage = window.totalSubawardAmount > 0 ? ((amount / window.totalSubawardAmount) * 100).toFixed(1) : '0.0';
+                    const name = (sub.recipient_name || sub.subawardee_name || 'N/A').replace(/"/g, '""');
+                    const description = (sub.description || 'N/A').replace(/"/g, '""');
+                    const date = sub.action_date || sub.subaward_date || 'N/A';
+                    
+                    csvContent += `${index + 1},"${name}",${amount},${percentage}%,${date},"${description}"\n`;
+                });
+
+                console.log('CSV Content Size:', csvContent.length, 'bytes');
+                console.log('Number of rows:', window.currentSubawards.length);
+
+                // Create blob and download
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                
+                const awardId = urlParams.get('awardId') || 'contract';
+                link.download = `subcontractors-${awardId}-${Date.now()}.csv`;
+                
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                
+                console.log('✅ CSV file downloaded successfully');
+            } catch (error) {
+                console.error('Download error:', error);
+                alert('Failed to download file: ' + error.message);
+            }
+        }
+
+        function copySubawardsJson() {
+            const jsonText = document.getElementById('subawardsJsonData').textContent;
+            const btn = event.target;
+            const originalText = btn.textContent;
+            
+            // Try modern clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(jsonText).then(() => {
+                    btn.textContent = '✅ Copied!';
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Clipboard API failed:', err);
+                    copyJsonFallback(jsonText, btn, originalText);
+                });
+            } else {
+                copyJsonFallback(jsonText, btn, originalText);
+            }
+        }
+
+        async function generateCuratedReport() {
+            const btn = event.target;
+            const originalText = btn.textContent;
+            
+            try {
+                btn.textContent = '📄 Generating PDF...';
+                btn.disabled = true;
+                
+                // Temporarily expand all descriptions and show all rows
+                const descriptionCells = document.querySelectorAll('.description-cell');
+                const hiddenRows = document.querySelectorAll('.hidden-row');
+                
+                // Store original states
+                const originalStates = [];
+                descriptionCells.forEach(cell => {
+                    originalStates.push({
+                        element: cell,
+                        wasExpanded: cell.classList.contains('expanded')
+                    });
+                    
+                    // Expand all descriptions
+                    const fullText = cell.getAttribute('data-full');
+                    if (fullText) {
+                        cell.textContent = fullText;
+                        cell.classList.remove('truncated');
+                        cell.classList.add('expanded');
+                    }
+                });
+                
+                // Show all hidden rows
+                hiddenRows.forEach(row => {
+                    row.style.display = 'table-row';
+                });
+                
+                // Clone the main content for PDF
+                const element = document.querySelector('.detail-container').cloneNode(true);
+                
+                // Remove buttons and interactive elements from clone (keep badges!)
+                element.querySelectorAll('.toggle-rows-btn, .download-excel-btn, .toggle-desc-btn, .info-icon').forEach(el => el.remove());
+                
+                // Get award ID for filename
+                const awardId = urlParams.get('awardId') || 'contract';
+                
+                // PDF options
+                const opt = {
+                    margin: [10, 10, 10, 10],
+                    filename: `curated-report-${awardId}-${Date.now()}.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2, useCORS: true },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+                
+                // Generate PDF
+                await html2pdf().set(opt).from(element).save();
+                
+                console.log('✅ PDF generated successfully');
+                btn.textContent = '✅ PDF Downloaded!';
+                
+                // Restore original states
+                setTimeout(() => {
+                    originalStates.forEach(state => {
+                        if (!state.wasExpanded) {
+                            const fullText = state.element.getAttribute('data-full');
+                            const truncated = fullText.length > 80 ? fullText.substring(0, 80) + '...' : fullText;
+                            state.element.textContent = truncated;
+                            state.element.classList.remove('expanded');
+                            state.element.classList.add('truncated');
+                        }
+                    });
+                    
+                    hiddenRows.forEach(row => {
+                        row.style.display = 'none';
+                    });
+                    
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }, 2000);
+                
+            } catch (error) {
+                console.error('PDF generation error:', error);
+                alert('Failed to generate PDF: ' + error.message);
+                btn.textContent = originalText;
+                btn.disabled = false;
             }
         }
 
