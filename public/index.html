@@ -135,12 +135,12 @@
         <button class="btn btn-primary" onclick="searchContracts()">
             <span>🔎</span>
             Search All Databases
-        </button>
+                    </button>
 
         <button class="btn btn-secondary" onclick="clearSearch()">
             <span>↻</span>
             Clear Search
-        </button>
+                    </button>
     </div>
 
     <script>
@@ -151,7 +151,7 @@
                 alert('Please enter a search term');
                 return;
             }
-
+            
             // Navigate to results page with search query
             window.location.href = '/results.html?q=' + encodeURIComponent(searchValue);
         }

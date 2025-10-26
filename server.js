@@ -73,9 +73,9 @@ app.post('/api/search', async (req, res) => {
 });
 
 /**
- * Get detailed award information using proper two-step flow
- * Step 1: Search by Award ID to get generated_internal_id
- * Step 2: Call /awards/{generated_internal_id}/ for full details
+ * Get detailed award information
+ * Directly calls /awards/{award_id}/ endpoint
+ * The award_id should be generated_unique_award_id from search results
  */
 app.get('/api/award/details/:awardId', async (req, res) => {
     try {
@@ -85,52 +85,24 @@ app.get('/api/award/details/:awardId', async (req, res) => {
             return res.status(400).json({ error: 'Award ID is required' });
         }
         
-        console.log('🔍 Step 1: Resolving award ID to get generated_internal_id...');
+        console.log('🔍 Fetching award details for:', awardId);
         
         const client = new USASpendingClient();
         
-        // Step 1: Search to get the generated_internal_id
-        const searchResults = await client.searchContracts({
-            startDate: '2020-01-01',
-            endDate: new Date().toISOString().split('T')[0],
-            keywords: awardId,
-            limit: 1
-        });
-
-        if (!searchResults.results || searchResults.results.length === 0) {
-            return res.status(404).json({ 
-                error: 'Award not found',
-                message: 'No award found with this ID'
-            });
-        }
-
-        const generatedInternalId = searchResults.results[0]['generated_unique_award_id'];
-        
-        if (!generatedInternalId) {
-            return res.status(404).json({ 
-                error: 'Generated internal ID not found',
-                message: 'Unable to resolve award ID to internal ID'
-            });
-        }
-
-        console.log('✅ Found generated_internal_id:', generatedInternalId);
-        console.log('🔍 Step 2: Fetching full award details...');
-
-        // Step 2: Get full details using generated_internal_id
-        const details = await client.getAwardDetails(generatedInternalId);
+        // Call the awards endpoint directly with the generated_unique_award_id
+        const details = await client.getAwardDetails(awardId);
 
         console.log('✅ Award details retrieved successfully');
             
             res.json({ 
             ...details,
-            _api_endpoint: `https://api.usaspending.gov/api/v2/awards/${generatedInternalId}/`,
-            _search_endpoint: 'https://api.usaspending.gov/api/v2/search/spending_by_award/',
-            _generated_internal_id: generatedInternalId,
+            _api_endpoint: `https://api.usaspending.gov/api/v2/awards/${encodeURIComponent(awardId)}/`,
             _award_id: awardId
-            });
-            
-        } catch (error) {
+        });
+        
+    } catch (error) {
         console.error('❌ Award details error:', error.message);
+        console.error('Stack trace:', error.stack);
         res.status(500).json({ 
             error: 'Failed to get award details',
             message: error.message 
