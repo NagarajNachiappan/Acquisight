@@ -105,14 +105,18 @@ class USASpendingClient {
         } = options;
 
         const filters = {
-            award_type_codes: this.contractTypes,
-            time_period: [
+            award_type_codes: this.contractTypes
+        };
+
+        // Only add time period if dates are provided
+        if (startDate && endDate) {
+            filters.time_period = [
                 {
                     start_date: startDate,
                     end_date: endDate
                 }
-            ]
-        };
+            ];
+        }
 
         if (keywords) {
             filters.keywords = [keywords];

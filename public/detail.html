@@ -31,8 +31,6 @@
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 20px;
         }
 
         .sidebar-title {
@@ -245,6 +243,24 @@
             border-color: #d1d5db;
         }
 
+        .offers-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #7c2d12, #991b1b);
+            color: white;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            box-shadow: 0 2px 8px rgba(124, 45, 18, 0.3);
+            line-height: 1;
+            white-space: nowrap;
+        }
+
         .data-label {
             font-size: 13px;
             color: #6b7280;
@@ -364,7 +380,7 @@
             font-weight: 700;
             position: absolute;
             top: 20px;
-            right: 20px;
+            right: 80px;
             box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
             line-height: 1;
         }
@@ -646,6 +662,204 @@
             display: none;
         }
 
+        .perplexity-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .perplexity-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .perplexity-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .perplexity-subtitle {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .perplexity-content {
+            padding: 20px;
+        }
+
+        .perplexity-placeholder {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .gemini-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            border-left: 4px solid #4285f4;
+        }
+
+        .gemini-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .gemini-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .gemini-subtitle {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .gemini-content {
+            padding: 20px;
+        }
+
+        .gemini-placeholder {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .ai-analysis-content {
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .ai-analysis-content h1, 
+        .ai-analysis-content h2, 
+        .ai-analysis-content h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .ai-analysis-content p {
+            margin-bottom: 15px;
+        }
+
+        .ai-analysis-content strong {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .ai-analysis-content table,
+        .ai-analysis-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .ai-analysis-content table th,
+        .ai-analysis-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ai-analysis-content table td,
+        .ai-analysis-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e0e0e0;
+            background: white;
+            vertical-align: top;
+        }
+
+        .ai-analysis-content table tr:last-child td,
+        .ai-analysis-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .ai-analysis-content table tr:hover td,
+        .ai-analysis-table tbody tr:hover td {
+            background: #f8f9fa;
+        }
+
+        .ai-analysis-table tbody tr:nth-child(even) td {
+            background: #fafbfc;
+        }
+
+        .ai-analysis-table tbody tr:nth-child(even):hover td {
+            background: #f0f2f5;
+        }
+
+        .ai-analysis-content a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .ai-analysis-content a:hover {
+            text-decoration: underline;
+        }
+
+        .ai-error {
+            color: #c62828;
+            padding: 20px;
+            background: #ffebee;
+            border-radius: 8px;
+            border-left: 4px solid #c62828;
+        }
+
+        .ai-citations {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f5f7fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .ai-citations h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .ai-citations ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ai-citations li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .ai-citations li:last-child {
+            border-bottom: none;
+        }
+
         .developer-corner-toggle {
             text-align: center;
             margin-top: 50px;
@@ -825,7 +1039,8 @@
             .percentage-badge,
             .days-badge,
             .count-badge,
-            .section-count-badge {
+            .section-count-badge,
+            .offers-badge {
                 position: static !important;
                 margin-left: 8px;
                 display: inline-flex !important;
@@ -890,8 +1105,11 @@
                 <button onclick="generateUSAspendingReport()" class="pdf-report-btn">
                     🏛️ USAspending.gov Report
                 </button>
+                <button onclick="generateFPDSReport()" class="pdf-report-btn" style="margin-top: 10px;">
+                    📊 FPDS.gov Report
+                </button>
                 <button onclick="generateCuratedReport()" class="pdf-report-btn" style="margin-top: 10px;">
-                    📊 Curated Contract Report
+                    📋 Curated Contract Report
                 </button>
             </div>
         </div>
@@ -926,19 +1144,28 @@
 
         // Helper function to calculate days difference
         function calculateDaysDifference(dateString) {
-            if (!dateString || dateString === 'N/A') return null;
-            
-            const endDate = new Date(dateString);
-            const today = new Date();
-            
-            // Reset time to midnight for accurate day comparison
-            endDate.setHours(0, 0, 0, 0);
-            today.setHours(0, 0, 0, 0);
-            
-            const diffTime = endDate - today;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            
-            return diffDays;
+            try {
+                if (!dateString || dateString === 'N/A') return null;
+                
+                const endDate = new Date(dateString);
+                
+                // Check if date is valid
+                if (isNaN(endDate.getTime())) return null;
+                
+                const today = new Date();
+                
+                // Reset time to midnight for accurate day comparison
+                endDate.setHours(0, 0, 0, 0);
+                today.setHours(0, 0, 0, 0);
+                
+                const diffTime = endDate - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                return diffDays;
+            } catch (error) {
+                console.error('Error calculating days difference:', error);
+                return null;
+            }
         }
 
         // Get award ID from URL
@@ -999,6 +1226,9 @@
                 if (response.ok && data && !data.error) {
                     console.log('✅ Awards API data received');
                     displayAwardDetails(data, displayAwardId);
+                    
+                    // Initialize AI Analysis after contract data loads
+                    initializeAIAnalysis(data);
                 } else {
                     const errorMsg = data.message || data.error || 'Failed to load award details';
                     document.getElementById('detailContainer').innerHTML = '<div class="error-message"><strong>Error:</strong> ' + errorMsg + '</div>';
@@ -1237,29 +1467,82 @@
                         </div>
                     </div>
 
-                    <!-- Competition Information -->
+                    <!-- Competition, Solicitation, and Contract Details -->
                     <div class="section">
-                        <div class="section-title">🏆 Competition Information</div>
+                        <div class="section-title">📋 Competition, Solicitation, and Contract Details</div>
                         <div class="data-grid">
                             <div class="data-item">
-                                <div class="data-label">Number of Offers Received</div>
+                                <div class="data-label">
+                                    Number of Offers Received
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Total bids submitted in response to the solicitation.</div>
+                                ${numberOfOffers !== 'N/A' && numberOfOffers > 0 ? `<div class="offers-badge">${numberOfOffers} Offers</div>` : ''}
                                 <div class="data-value">${numberOfOffers}</div>
                             </div>
                             <div class="data-item">
-                                <div class="data-label">Extent Competed</div>
-                                <div class="data-value">${extentCompeted}</div>
+                                <div class="data-label">
+                                    NAICS Code: Description
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">North American Industry Classification for the work (e.g., 541512: Computer Systems Design Services).</div>
+                                <div class="data-value">${naicsDisplay}</div>
                             </div>
                             <div class="data-item">
-                                <div class="data-label">Set-Aside Type</div>
-                                <div class="data-value">${setAside}</div>
+                                <div class="data-label">
+                                    Solicitation Procedures Description
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Explains the solicitation method used to compete the award. "Subject to Multiple Award Fair Opportunity" means the award was made under a Multiple Award Contract (MAC) where all eligible vendors were given a fair opportunity to compete for task/delivery orders, per FAR 16.505(b).</div>
+                                <div class="data-value">${solicitationProceduresDesc}</div>
                             </div>
                             <div class="data-item">
-                                <div class="data-label">Solicitation Procedures</div>
-                                <div class="data-value">${solicitationProcedures}</div>
+                                <div class="data-label">
+                                    Extent Competed Description
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Describes the level of competition. "Full and Open Competition" means all responsible sources could submit offers.</div>
+                                <div class="data-value">${extentCompetedDesc}</div>
                             </div>
                             <div class="data-item">
-                                <div class="data-label">Contract Pricing</div>
-                                <div class="data-value">${contractPricing}</div>
+                                <div class="data-label">
+                                    Other Than Full and Open
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Justification code (and text) when the action was not competed openly. If the award was fully competed, these are typically null.</div>
+                                <div class="data-value">${otherThanFullOpenDisplay}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Contract Pricing Type
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Pricing arrangement (e.g., Firm Fixed Price).</div>
+                                <div class="data-value">${contractPricingType}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Fair Opportunity
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Indicates whether fair-opportunity was given for orders under a multiple-award IDV (FAR 16.505).</div>
+                                <div class="data-value">${fairOpportunityDisplay}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    FedBizOpps (Public Posting)
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Indicates whether the solicitation for this award was publicly posted on FedBizOpps.gov (now SAM.gov Contract Opportunities). A value of "YES" means the opportunity was advertised for open competition in compliance with FAR Part 5 (Publicizing Contract Actions). A value of "NO" means it was not publicly posted — typically due to an authorized exception such as urgency, security, or sole-source justification.</div>
+                                <div class="data-value">${fedBizOpps}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Type of Set-Aside
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Identifies whether the solicitation or award was reserved for a specific small-business category under the Small Business Act (FAR Part 19). Examples include Small Business Set-Aside, 8(a) Program, HUBZone, Service-Disabled Veteran-Owned, or Woman-Owned Small Business. A null value indicates no set-aside was applied—the competition was open to all qualified vendors.</div>
+                                <div class="data-value">${typeSetAsideDisplay}</div>
                             </div>
                         </div>
                     </div>
@@ -1301,6 +1584,56 @@
                         <div id="transactionsTableContainer">
                             <div class="loading-message">Loading transaction data...</div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Perplexity AI Analysis Section -->
+                <div class="perplexity-section">
+                    <div class="perplexity-header">
+                        <h2 class="perplexity-title">
+                            <span>🤖</span>
+                            Perplexity AI Analysis
+                        </h2>
+                        <div class="perplexity-subtitle">AI-powered insights and analysis of this contract</div>
+                    </div>
+                    
+                    <div class="perplexity-content" id="perplexityContent">
+                        <div class="loading-message">🔮 Analyzing contractor organization with Perplexity AI...</div>
+                    </div>
+                    
+                    <!-- Subcontractor Analysis Container -->
+                    <div id="perplexitySubcontractors" style="margin-top: 40px;">
+                        <!-- Subcontractor analyses will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Gemini Analysis Section -->
+                <div class="gemini-section">
+                    <div class="gemini-header">
+                        <h2 class="gemini-title">
+                            <span>✨</span>
+                            Gemini AI Analysis
+                        </h2>
+                        <div class="gemini-subtitle">Google Gemini-powered contract research and insights</div>
+                    </div>
+                    
+                    <!-- Contract Overview Section -->
+                    <div style="background: white; padding: 25px; border-radius: 12px; margin-bottom: 30px; border-left: 4px solid #4285f4; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <h3 style="color: #4285f4; margin: 0 0 15px 0; font-size: 18px; font-weight: 700;">
+                            📋 Contract Overview
+                        </h3>
+                        <div id="contractOverviewContent">
+                            <div class="loading-message">🔍 Researching contract details...</div>
+                        </div>
+                    </div>
+                    
+                    <div class="gemini-content" id="geminiContent">
+                        <div class="loading-message">✨ Analyzing contractor organization with Gemini AI...</div>
+                    </div>
+                    
+                    <!-- Subcontractor Analysis Container -->
+                    <div id="geminiSubcontractors" style="margin-top: 40px;">
+                        <!-- Subcontractor analyses will be inserted here -->
                     </div>
                 </div>
 
@@ -1460,8 +1793,26 @@
             
             // Competition data from latest_transaction_contract_data
             const contractData = data.latest_transaction_contract_data || {};
-            const solicitationProcedures = contractData.solicitation_procedures_description || contractData.solicitation_procedures || 'N/A';
             const numberOfOffers = contractData.number_of_offers_received || 'N/A';
+            const naicsCode = contractData.naics || '';
+            const naicsDescription = contractData.naics_description || '';
+            const naicsDisplay = naicsCode && naicsDescription ? `${naicsCode}: ${naicsDescription}` : (naicsCode || naicsDescription || 'N/A');
+            const solicitationProceduresDesc = contractData.solicitation_procedures_description || 'N/A';
+            const extentCompetedDesc = contractData.extent_competed_description || 'N/A';
+            const otherThanFullOpen = contractData.other_than_full_and_open_competition || '';
+            const otherThanFullOpenDesc = contractData.other_than_full_and_open_competition_description || '';
+            const otherThanFullOpenDisplay = otherThanFullOpen && otherThanFullOpenDesc ? `${otherThanFullOpen}: ${otherThanFullOpenDesc}` : (otherThanFullOpen || otherThanFullOpenDesc || 'N/A');
+            const contractPricingType = contractData.type_of_contract_pricing_description || 'N/A';
+            const fairOpportunityLimited = contractData.fair_opportunity_limited_sources || '';
+            const fairOpportunityLimitedDesc = contractData.fair_opportunity_limited_sources_description || '';
+            const fairOpportunityDisplay = fairOpportunityLimited && fairOpportunityLimitedDesc ? `${fairOpportunityLimited}: ${fairOpportunityLimitedDesc}` : (fairOpportunityLimited || fairOpportunityLimitedDesc || 'N/A');
+            const fedBizOpps = contractData.fed_biz_opps_description || contractData.fed_biz_opps || 'N/A';
+            const typeSetAside = contractData.type_set_aside || '';
+            const typeSetAsideDesc = contractData.type_set_aside_description || '';
+            const typeSetAsideDisplay = typeSetAside && typeSetAsideDesc ? `${typeSetAside}: ${typeSetAsideDesc}` : (typeSetAside || typeSetAsideDesc || 'No Set-Aside Applied');
+            
+            // Legacy fields for old Competition section
+            const solicitationProcedures = contractData.solicitation_procedures_description || contractData.solicitation_procedures || 'N/A';
             const extentCompeted = contractData.extent_competed_description || contractData.extent_competed || 'N/A';
             const setAside = contractData.type_set_aside_description || contractData.type_set_aside || 'N/A';
             
@@ -1579,6 +1930,7 @@
                                 </div>
                                 <div class="tooltip">Summarizes financial magnitude of downstream awards.</div>
                                 ${subawardCount > 0 ? `<div class="count-badge">${subawardCount}</div>` : ''}
+                                ${baseExercisedOptionsValue > 0 ? `<div class="percentage-badge">${Math.round((totalSubawardAmount / baseExercisedOptionsValue) * 100)}%</div>` : ''}
                                 <div class="data-value amount">$${totalSubawardAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
                             </div>
                             <div class="data-item">
@@ -1665,25 +2017,82 @@
                         </div>
                     </div>
 
-                    <!-- Competition Information -->
+                    <!-- Competition, Solicitation, and Contract Details -->
                     <div class="section">
-                        <div class="section-title">🏆 Competition Information</div>
+                        <div class="section-title">📋 Competition, Solicitation, and Contract Details</div>
                         <div class="data-grid">
                             <div class="data-item">
-                                <div class="data-label">Number of Offers Received</div>
+                                <div class="data-label">
+                                    Number of Offers Received
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Total bids submitted in response to the solicitation.</div>
+                                ${numberOfOffers !== 'N/A' && numberOfOffers > 0 ? `<div class="offers-badge">${numberOfOffers} Offers</div>` : ''}
                                 <div class="data-value">${numberOfOffers}</div>
                             </div>
                             <div class="data-item">
-                                <div class="data-label">Extent Competed</div>
-                                <div class="data-value">${extentCompeted}</div>
+                                <div class="data-label">
+                                    NAICS Code: Description
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">North American Industry Classification for the work (e.g., 541512: Computer Systems Design Services).</div>
+                                <div class="data-value">${naicsDisplay}</div>
                             </div>
                             <div class="data-item">
-                                <div class="data-label">Set-Aside Type</div>
-                                <div class="data-value">${setAside}</div>
+                                <div class="data-label">
+                                    Solicitation Procedures Description
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Explains the solicitation method used to compete the award. "Subject to Multiple Award Fair Opportunity" means the award was made under a Multiple Award Contract (MAC) where all eligible vendors were given a fair opportunity to compete for task/delivery orders, per FAR 16.505(b).</div>
+                                <div class="data-value">${solicitationProceduresDesc}</div>
                             </div>
                             <div class="data-item">
-                                <div class="data-label">Solicitation Procedures</div>
-                                <div class="data-value">${solicitationProcedures}</div>
+                                <div class="data-label">
+                                    Extent Competed Description
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Describes the level of competition. "Full and Open Competition" means all responsible sources could submit offers.</div>
+                                <div class="data-value">${extentCompetedDesc}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Other Than Full and Open
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Justification code (and text) when the action was not competed openly. If the award was fully competed, these are typically null.</div>
+                                <div class="data-value">${otherThanFullOpenDisplay}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Contract Pricing Type
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Pricing arrangement (e.g., Firm Fixed Price).</div>
+                                <div class="data-value">${contractPricingType}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Fair Opportunity
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Indicates whether fair-opportunity was given for orders under a multiple-award IDV (FAR 16.505).</div>
+                                <div class="data-value">${fairOpportunityDisplay}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    FedBizOpps (Public Posting)
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Indicates whether the solicitation for this award was publicly posted on FedBizOpps.gov (now SAM.gov Contract Opportunities). A value of "YES" means the opportunity was advertised for open competition in compliance with FAR Part 5 (Publicizing Contract Actions). A value of "NO" means it was not publicly posted — typically due to an authorized exception such as urgency, security, or sole-source justification.</div>
+                                <div class="data-value">${fedBizOpps}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-label">
+                                    Type of Set-Aside
+                                    <span class="info-icon">i</span>
+                                </div>
+                                <div class="tooltip">Identifies whether the solicitation or award was reserved for a specific small-business category under the Small Business Act (FAR Part 19). Examples include Small Business Set-Aside, 8(a) Program, HUBZone, Service-Disabled Veteran-Owned, or Woman-Owned Small Business. A null value indicates no set-aside was applied—the competition was open to all qualified vendors.</div>
+                                <div class="data-value">${typeSetAsideDisplay}</div>
                             </div>
                         </div>
                     </div>
@@ -1725,6 +2134,56 @@
                         <div id="transactionsTableContainer">
                             <div class="loading-message">Loading transaction data...</div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Perplexity AI Analysis Section -->
+                <div class="perplexity-section">
+                    <div class="perplexity-header">
+                        <h2 class="perplexity-title">
+                            <span>🤖</span>
+                            Perplexity AI Analysis
+                        </h2>
+                        <div class="perplexity-subtitle">AI-powered insights and analysis of this contract</div>
+                    </div>
+                    
+                    <div class="perplexity-content" id="perplexityContent">
+                        <div class="loading-message">🔮 Analyzing contractor organization with Perplexity AI...</div>
+                    </div>
+                    
+                    <!-- Subcontractor Analysis Container -->
+                    <div id="perplexitySubcontractors" style="margin-top: 40px;">
+                        <!-- Subcontractor analyses will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Gemini Analysis Section -->
+                <div class="gemini-section">
+                    <div class="gemini-header">
+                        <h2 class="gemini-title">
+                            <span>✨</span>
+                            Gemini AI Analysis
+                        </h2>
+                        <div class="gemini-subtitle">Google Gemini-powered contract research and insights</div>
+                    </div>
+                    
+                    <!-- Contract Overview Section -->
+                    <div style="background: white; padding: 25px; border-radius: 12px; margin-bottom: 30px; border-left: 4px solid #4285f4; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <h3 style="color: #4285f4; margin: 0 0 15px 0; font-size: 18px; font-weight: 700;">
+                            📋 Contract Overview
+                        </h3>
+                        <div id="contractOverviewContent">
+                            <div class="loading-message">🔍 Researching contract details...</div>
+                        </div>
+                    </div>
+                    
+                    <div class="gemini-content" id="geminiContent">
+                        <div class="loading-message">✨ Analyzing contractor organization with Gemini AI...</div>
+                    </div>
+                    
+                    <!-- Subcontractor Analysis Container -->
+                    <div id="geminiSubcontractors" style="margin-top: 40px;">
+                        <!-- Subcontractor analyses will be inserted here -->
                     </div>
                 </div>
 
@@ -1891,12 +2350,23 @@
                 ? 'https://www.usaspending.gov/award/' + encodeURIComponent(urlId)
                 : 'https://www.usaspending.gov/award/' + encodeURIComponent(generatedUniqueAwardId || awardId);
             
-            if (usaspendingUrl) {
+            // Construct FPDS.gov URL
+            const fpdsUrl = 'https://www.fpds.gov/ezsearch/search.do?indexName=awardfull&templateName=1.5.3&s=FPDS.GOV&q=' + encodeURIComponent(awardId);
+            
+            if (usaspendingUrl || fpdsUrl) {
                 linksContainer.innerHTML = `
                     <div class="link-wrapper">
                         <a href="${usaspendingUrl}" target="_blank" rel="noopener noreferrer" class="external-link">
                             <span>🏛️ View on USAspending.gov</span>
                             <button class="copy-btn" onclick="event.preventDefault(); event.stopPropagation(); copyUrl('${usaspendingUrl.replace(/'/g, "\\'")}')">
+                                📋 Copy
+                            </button>
+                        </a>
+                    </div>
+                    <div class="link-wrapper" style="margin-top: 10px;">
+                        <a href="${fpdsUrl}" target="_blank" rel="noopener noreferrer" class="external-link">
+                            <span>📊 View on FPDS.gov</span>
+                            <button class="copy-btn" onclick="event.preventDefault(); event.stopPropagation(); copyUrl('${fpdsUrl.replace(/'/g, "\\'")}')">
                                 📋 Copy
                             </button>
                         </a>
@@ -1908,24 +2378,31 @@
         }
 
         function copyUrl(url) {
-            const btn = event.target;
-            const originalText = btn.textContent;
-            
-            // Try modern clipboard API first
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(url).then(() => {
-                    btn.textContent = '✅ Copied!';
-                    setTimeout(() => {
-                        btn.textContent = originalText;
-                    }, 2000);
-                }).catch(err => {
-                    console.error('Clipboard API failed:', err);
-                    // Fallback to older method
+            try {
+                const btn = event.target;
+                if (!btn || !url) return;
+                
+                const originalText = btn.textContent;
+                
+                // Try modern clipboard API first
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(url).then(() => {
+                        btn.textContent = '✅ Copied!';
+                        setTimeout(() => {
+                            btn.textContent = originalText;
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Clipboard API failed:', err);
+                        // Fallback to older method
+                        copyUrlFallback(url, btn, originalText);
+                    });
+                } else {
+                    // Use fallback for older browsers
                     copyUrlFallback(url, btn, originalText);
-                });
-            } else {
-                // Use fallback for older browsers
-                copyUrlFallback(url, btn, originalText);
+                }
+            } catch (error) {
+                console.error('Error copying URL:', error);
+                alert('Failed to copy URL');
             }
         }
 
@@ -2047,14 +2524,19 @@
         }
 
         function displayTransactionsTable(transactions) {
-            const container = document.getElementById('transactionsTableContainer');
-            
-            if (!transactions || transactions.length === 0) {
-                container.innerHTML = '<div class="no-data-message">No transactions found for this contract.</div>';
-                return;
-            }
+            try {
+                const container = document.getElementById('transactionsTableContainer');
+                if (!container) {
+                    console.error('Transactions table container not found');
+                    return;
+                }
+                
+                if (!transactions || transactions.length === 0) {
+                    container.innerHTML = '<div class="no-data-message">No transactions found for this contract.</div>';
+                    return;
+                }
 
-            let tableHTML = `
+                let tableHTML = `
                 <table class="subcontractor-table">
                     <thead>
                         <tr>
@@ -2108,141 +2590,1469 @@
                 downloadBtn.style.display = 'inline-flex';
             }
             
-            // Show the toggle button if there are more than 5 rows
-            const toggleBtn = document.getElementById('toggleTransactionRowsBtn');
-            if (toggleBtn && transactions.length > 5) {
-                toggleBtn.style.display = 'inline-block';
-                toggleBtn.textContent = 'Show All (' + transactions.length + ')';
+                // Show the toggle button if there are more than 5 rows
+                const toggleBtn = document.getElementById('toggleTransactionRowsBtn');
+                if (toggleBtn && transactions.length > 5) {
+                    toggleBtn.style.display = 'inline-block';
+                    toggleBtn.textContent = 'Show All (' + transactions.length + ')';
+                }
+                
+                // Store the data for Excel export
+                window.currentTransactions = transactions;
+            } catch (error) {
+                console.error('Error displaying transactions table:', error);
+                const container = document.getElementById('transactionsTableContainer');
+                if (container) {
+                    container.innerHTML = '<div class="no-data-message">Error displaying transactions table. Please try again.</div>';
+                }
             }
-            
-            // Store the data for Excel export
-            window.currentTransactions = transactions;
         }
 
         function toggleDescription(cell) {
-            const fullText = cell.getAttribute('data-full');
-            const isExpanded = cell.classList.contains('expanded');
-            
-            if (isExpanded) {
-                // Collapse - show truncated version
-                const truncated = fullText.length > 80 ? fullText.substring(0, 80) + '...' : fullText;
-                cell.textContent = truncated;
-                cell.classList.remove('expanded');
-                cell.classList.add('truncated');
-            } else {
-                // Expand - show full text
-                cell.textContent = fullText;
-                cell.classList.remove('truncated');
-                cell.classList.add('expanded');
+            try {
+                if (!cell) return;
+                
+                const fullText = cell.getAttribute('data-full');
+                if (!fullText) return;
+                
+                const isExpanded = cell.classList.contains('expanded');
+                
+                if (isExpanded) {
+                    // Collapse - show truncated version
+                    const truncated = fullText.length > 80 ? fullText.substring(0, 80) + '...' : fullText;
+                    cell.textContent = truncated;
+                    cell.classList.remove('expanded');
+                    cell.classList.add('truncated');
+                } else {
+                    // Expand - show full text
+                    cell.textContent = fullText;
+                    cell.classList.remove('truncated');
+                    cell.classList.add('expanded');
+                }
+            } catch (error) {
+                console.error('Error toggling description:', error);
             }
         }
 
         function toggleAllDescriptions(event) {
-            event.stopPropagation();
-            const btn = event.target;
-            const cells = document.querySelectorAll('#transactionsTableContainer .description-cell');
-            const isExpandAll = btn.textContent === 'Expand All';
-            
-            cells.forEach(cell => {
-                const fullText = cell.getAttribute('data-full');
+            try {
+                event.stopPropagation();
+                const btn = event.target;
+                if (!btn) return;
                 
-                if (isExpandAll) {
-                    // Expand all
-                    cell.textContent = fullText;
-                    cell.classList.remove('truncated');
-                    cell.classList.add('expanded');
-                } else {
-                    // Collapse all
-                    const truncated = fullText.length > 80 ? fullText.substring(0, 80) + '...' : fullText;
-                    cell.textContent = truncated;
-                    cell.classList.remove('expanded');
-                    cell.classList.add('truncated');
-                }
-            });
-            
-            btn.textContent = isExpandAll ? 'Collapse All' : 'Expand All';
+                const cells = document.querySelectorAll('#transactionsTableContainer .description-cell');
+                const isExpandAll = btn.textContent === 'Expand All';
+                
+                cells.forEach(cell => {
+                    const fullText = cell.getAttribute('data-full');
+                    if (!fullText) return;
+                    
+                    if (isExpandAll) {
+                        // Expand all
+                        cell.textContent = fullText;
+                        cell.classList.remove('truncated');
+                        cell.classList.add('expanded');
+                    } else {
+                        // Collapse all
+                        const truncated = fullText.length > 80 ? fullText.substring(0, 80) + '...' : fullText;
+                        cell.textContent = truncated;
+                        cell.classList.remove('expanded');
+                        cell.classList.add('truncated');
+                    }
+                });
+                
+                btn.textContent = isExpandAll ? 'Collapse All' : 'Expand All';
+            } catch (error) {
+                console.error('Error toggling all descriptions:', error);
+            }
         }
 
         function toggleAllSubawardDescriptions(event) {
-            event.stopPropagation();
-            const btn = event.target;
-            const cells = document.querySelectorAll('#subcontractorTableContainer .description-cell');
-            const isExpandAll = btn.textContent === 'Expand All';
-            
-            cells.forEach(cell => {
-                const fullText = cell.getAttribute('data-full');
+            try {
+                event.stopPropagation();
+                const btn = event.target;
+                if (!btn) return;
                 
-                if (isExpandAll) {
-                    // Expand all
-                    cell.textContent = fullText;
-                    cell.classList.remove('truncated');
-                    cell.classList.add('expanded');
-                } else {
-                    // Collapse all
-                    const truncated = fullText.length > 80 ? fullText.substring(0, 80) + '...' : fullText;
-                    cell.textContent = truncated;
-                    cell.classList.remove('expanded');
-                    cell.classList.add('truncated');
-                }
-            });
-            
-            btn.textContent = isExpandAll ? 'Collapse All' : 'Expand All';
+                const cells = document.querySelectorAll('#subcontractorTableContainer .description-cell');
+                const isExpandAll = btn.textContent === 'Expand All';
+                
+                cells.forEach(cell => {
+                    const fullText = cell.getAttribute('data-full');
+                    if (!fullText) return;
+                    
+                    if (isExpandAll) {
+                        // Expand all
+                        cell.textContent = fullText;
+                        cell.classList.remove('truncated');
+                        cell.classList.add('expanded');
+                    } else {
+                        // Collapse all
+                        const truncated = fullText.length > 80 ? fullText.substring(0, 80) + '...' : fullText;
+                        cell.textContent = truncated;
+                        cell.classList.remove('expanded');
+                        cell.classList.add('truncated');
+                    }
+                });
+                
+                btn.textContent = isExpandAll ? 'Collapse All' : 'Expand All';
+            } catch (error) {
+                console.error('Error toggling all subaward descriptions:', error);
+            }
         }
 
         function toggleTransactionRows() {
-            const btn = document.getElementById('toggleTransactionRowsBtn');
-            const rows = document.querySelectorAll('#transactionsTableContainer .hidden-row');
-            const isShowAll = btn.textContent.startsWith('Show All');
-            
-            if (isShowAll) {
-                // Show all rows
-                rows.forEach(row => row.classList.remove('hidden-row'));
-                btn.textContent = 'Show Less';
-            } else {
-                // Hide rows beyond first 5
-                const allRows = document.querySelectorAll('#transactionsTableContainer tbody tr');
-                allRows.forEach((row, index) => {
-                    if (index >= 5) {
-                        row.classList.add('hidden-row');
-                    }
-                });
-                const totalRows = window.currentTransactions ? window.currentTransactions.length : allRows.length;
-                btn.textContent = 'Show All (' + totalRows + ')';
+            try {
+                const btn = document.getElementById('toggleTransactionRowsBtn');
+                if (!btn) return;
+                
+                const rows = document.querySelectorAll('#transactionsTableContainer .hidden-row');
+                const isShowAll = btn.textContent.startsWith('Show All');
+                
+                if (isShowAll) {
+                    // Show all rows
+                    rows.forEach(row => row.classList.remove('hidden-row'));
+                    btn.textContent = 'Show Less';
+                } else {
+                    // Hide rows beyond first 5
+                    const allRows = document.querySelectorAll('#transactionsTableContainer tbody tr');
+                    allRows.forEach((row, index) => {
+                        if (index >= 5) {
+                            row.classList.add('hidden-row');
+                        }
+                    });
+                    const totalRows = window.currentTransactions ? window.currentTransactions.length : allRows.length;
+                    btn.textContent = 'Show All (' + totalRows + ')';
+                }
+            } catch (error) {
+                console.error('Error toggling transaction rows:', error);
             }
         }
 
         function toggleSubawardRows() {
-            const btn = document.getElementById('toggleSubawardRowsBtn');
-            const rows = document.querySelectorAll('#subcontractorTableContainer .hidden-row');
-            const isShowAll = btn.textContent.startsWith('Show All');
+            try {
+                const btn = document.getElementById('toggleSubawardRowsBtn');
+                if (!btn) return;
+                
+                const rows = document.querySelectorAll('#subcontractorTableContainer .hidden-row');
+                const isShowAll = btn.textContent.startsWith('Show All');
+                
+                if (isShowAll) {
+                    // Show all rows
+                    rows.forEach(row => row.classList.remove('hidden-row'));
+                    btn.textContent = 'Show Less';
+                } else {
+                    // Hide rows beyond first 5
+                    const allRows = document.querySelectorAll('#subcontractorTableContainer tbody tr');
+                    allRows.forEach((row, index) => {
+                        if (index >= 5) {
+                            row.classList.add('hidden-row');
+                        }
+                    });
+                    const totalRows = window.currentSubawards ? window.currentSubawards.length : allRows.length;
+                    btn.textContent = 'Show All (' + totalRows + ')';
+                }
+            } catch (error) {
+                console.error('Error toggling subaward rows:', error);
+            }
+        }
+
+        // Store AI API logs globally for Developer Corner
+        window.aiApiLogs = {
+            perplexity: null,
+            gemini: null
+        };
+
+        /**
+         * Load Contract Research from Gemini AI
+         */
+        async function loadContractResearch(awardId, recipientName, description) {
+            const container = document.getElementById('contractOverviewContent');
+            if (!container) return;
             
-            if (isShowAll) {
-                // Show all rows
-                rows.forEach(row => row.classList.remove('hidden-row'));
-                btn.textContent = 'Show Less';
-            } else {
-                // Hide rows beyond first 5
-                const allRows = document.querySelectorAll('#subcontractorTableContainer tbody tr');
-                allRows.forEach((row, index) => {
-                    if (index >= 5) {
-                        row.classList.add('hidden-row');
-                    }
+            try {
+                console.log('🔍 Researching contract name for:', awardId);
+                
+                const response = await fetch('/api/research/contract', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        awardId, 
+                        recipientName, 
+                        description 
+                    })
+                }).catch(fetchError => {
+                    console.error('Fetch failed for contract research:', fetchError);
+                    throw new Error(`Network error: ${fetchError.message}`);
                 });
-                const totalRows = window.currentSubawards ? window.currentSubawards.length : allRows.length;
-                btn.textContent = 'Show All (' + totalRows + ')';
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Contract research API error:', response.status, errorText);
+                    throw new Error(`API error (${response.status})`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.contractInfo) {
+                    // Display contract overview
+                    container.innerHTML = `
+                        <div class="ai-analysis-content" style="font-size: 14px;">
+                            ${parseMarkdown(data.contractInfo)}
+                        </div>
+                        <div style="margin-top: 15px; padding: 12px; background: #e3f2fd; border-radius: 6px; font-size: 11px; color: #1976d2;">
+                            ⚡ Research completed in ${data.timeTaken}s using ${data.model}
+                            ${data.groundingMetadata && data.groundingMetadata.webSearchQueries > 0 ? `
+                                • 🔍 ${data.groundingMetadata.webSearchQueries} Google searches performed
+                            ` : ''}
+                        </div>
+                        <div id="toolsResearchContainer" style="margin-top: 25px;">
+                            <div class="loading-message">🔧 Researching tools and technologies...</div>
+                        </div>
+                    `;
+                    
+                    console.log('✅ Contract research loaded, now researching tools...');
+                    
+                    // Now research tools based on contract info
+                    loadToolsResearch(data.contractInfo, awardId, recipientName);
+                } else {
+                    container.innerHTML = `<div class="ai-error">❌ ${data.error || 'Failed to research contract'}</div>`;
+                }
+            } catch (error) {
+                console.error('Contract research error:', error);
+                container.innerHTML = `
+                    <div class="ai-error">
+                        <strong>❌ Error researching contract</strong><br>
+                        ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        /**
+         * Load Tools & Technology Research
+         */
+        async function loadToolsResearch(contractInfo, awardId, recipientName) {
+            const container = document.getElementById('toolsResearchContainer');
+            if (!container) return;
+            
+            try {
+                console.log('🔧 Loading tools research for:', awardId);
+                
+                const response = await fetch('/api/research/tools', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        contractInfo,
+                        awardId, 
+                        recipientName 
+                    })
+                }).catch(fetchError => {
+                    console.error('Fetch failed for tools research:', fetchError);
+                    throw new Error(`Network error: ${fetchError.message}`);
+                });
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Tools research API error:', response.status, errorText);
+                    throw new Error(`API error (${response.status})`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.toolsInfo) {
+                    container.innerHTML = `
+                        <div style="border-top: 2px solid #e0e0e0; padding-top: 20px; margin-top: 20px;">
+                            <h4 style="color: #4285f4; margin: 0 0 15px 0; font-size: 16px; font-weight: 700;">
+                                🔧 Tools, COTS & Technology Stack
+                            </h4>
+                            <div class="ai-analysis-content" style="font-size: 14px;">
+                                ${parseMarkdown(data.toolsInfo)}
+                            </div>
+                            <div style="margin-top: 15px; padding: 12px; background: #fff3e0; border-radius: 6px; font-size: 11px; color: #e65100;">
+                                ⚡ Tools research completed in ${data.timeTaken}s
+                                ${data.groundingMetadata && data.groundingMetadata.webSearchQueries > 0 ? `
+                                    • 🔍 ${data.groundingMetadata.webSearchQueries} Google searches performed
+                                ` : ''}
+                            </div>
+                        </div>
+                        <div id="gaoResearchContainer" style="margin-top: 25px;">
+                            <div class="loading-message">📊 Researching GAO reports...</div>
+                        </div>
+                    `;
+                    console.log('✅ Tools research loaded');
+                    
+                    // Now research GAO reports - pass the parent container's contractInfo
+                    const parentContainer = document.getElementById('contractOverviewContent');
+                    const contractInfoText = parentContainer ? parentContainer.querySelector('.ai-analysis-content')?.textContent || contractInfo : contractInfo;
+                    loadGAOResearch(contractInfoText, awardId, recipientName);
+                } else {
+                    container.innerHTML = `<div style="color: #999; font-style: italic; margin-top: 15px;">No tools information available</div>`;
+                }
+            } catch (error) {
+                console.error('Tools research error:', error);
+                container.innerHTML = `
+                    <div style="color: #c62828; padding: 15px; background: #ffebee; border-radius: 6px; margin-top: 15px;">
+                        <strong>❌ Error researching tools</strong><br>
+                        ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        /**
+         * Load GAO Reports Research
+         */
+        async function loadGAOResearch(contractInfo, awardId, recipientName) {
+            const container = document.getElementById('gaoResearchContainer');
+            if (!container) return;
+            
+            try {
+                console.log('📊 Loading GAO reports research for:', awardId);
+                
+                const response = await fetch('/api/research/gao', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        contractInfo,
+                        awardId, 
+                        recipientName 
+                    })
+                }).catch(fetchError => {
+                    console.error('Fetch failed for GAO research:', fetchError);
+                    throw new Error(`Network error: ${fetchError.message}`);
+                });
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('GAO research API error:', response.status, errorText);
+                    throw new Error(`API error (${response.status})`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.gaoInfo) {
+                    container.innerHTML = `
+                        <div style="border-top: 2px solid #e0e0e0; padding-top: 20px; margin-top: 20px;">
+                            <h4 style="color: #4285f4; margin: 0 0 15px 0; font-size: 16px; font-weight: 700;">
+                                📊 GAO Reports & Oversight
+                            </h4>
+                            <div class="ai-analysis-content" style="font-size: 14px;">
+                                ${parseMarkdown(data.gaoInfo)}
+                            </div>
+                            <div style="margin-top: 15px; padding: 12px; background: #fce4ec; border-radius: 6px; font-size: 11px; color: #c2185b;">
+                                ⚡ GAO research completed in ${data.timeTaken}s
+                                ${data.groundingMetadata && data.groundingMetadata.webSearchQueries > 0 ? `
+                                    • 🔍 ${data.groundingMetadata.webSearchQueries} Google searches performed
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                    console.log('✅ GAO research loaded');
+                } else {
+                    container.innerHTML = `<div style="color: #999; font-style: italic; margin-top: 15px;">No GAO reports information available</div>`;
+                }
+            } catch (error) {
+                console.error('GAO research error:', error);
+                container.innerHTML = `
+                    <div style="color: #c62828; padding: 15px; background: #ffebee; border-radius: 6px; margin-top: 15px;">
+                        <strong>❌ Error researching GAO reports</strong><br>
+                        ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        /**
+         * Load Perplexity AI Analysis
+         */
+        async function loadPerplexityAnalysis(companyName) {
+            const container = document.getElementById('perplexityContent');
+            
+            try {
+                console.log('🤖 Loading Perplexity analysis for:', companyName);
+                
+                const response = await fetch('/api/analyze/perplexity', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ companyName })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.analysis) {
+                    // Store the raw analysis for download
+                    window.perplexityAnalysis = {
+                        content: data.analysis,
+                        companyName: companyName,
+                        model: data.model
+                    };
+                    
+                    // Parse markdown and display with section header
+                    container.innerHTML = `
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px 30px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <h3 style="color: white; margin: 0; font-size: 20px; font-weight: 700;">
+                                        🏢 Prime Contractor Organizational Overview
+                                    </h3>
+                                    <div style="color: rgba(255, 255, 255, 0.85); font-size: 13px; margin-top: 5px;">
+                                        Comprehensive intelligence on ${companyName}
+                                    </div>
+                                </div>
+                                <button class="download-excel-btn" onclick="downloadPerplexityWord()" style="background: white; color: #667eea; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                                    📄 Download as Word
+                                </button>
+                            </div>
+                        </div>
+                        <div class="ai-analysis-content">
+                            ${parseMarkdown(data.analysis)}
+                        </div>
+                        ${data.citations && data.citations.length > 0 ? `
+                            <div class="ai-citations">
+                                <h4>📚 Sources & Citations</h4>
+                                <ul>
+                                    ${data.citations.map(c => `<li><a href="${c}" target="_blank">${c}</a></li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                        <div style="margin-top: 20px; font-size: 12px; color: #666;">
+                            ⚡ Analysis completed in ${data.timeTaken}s using ${data.model}
+                        </div>
+                    `;
+                    
+                    // Store API log
+                    window.aiApiLogs.perplexity = {
+                        request: data.apiRequest,
+                        response: data.apiResponse,
+                        timeTaken: data.timeTaken
+                    };
+                    
+                    console.log('✅ Perplexity analysis loaded');
+                } else {
+                    container.innerHTML = `<div class="ai-error">❌ ${data.error || 'Failed to load Perplexity analysis'}</div>`;
+                }
+            } catch (error) {
+                console.error('Perplexity analysis error:', error);
+                container.innerHTML = `<div class="ai-error">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        /**
+         * Load Gemini AI Analysis
+         */
+        async function loadGeminiAnalysis(companyName) {
+            const container = document.getElementById('geminiContent');
+            
+            try {
+                console.log('✨ Loading Gemini analysis for:', companyName);
+                
+                // Show loading for both
+                container.innerHTML = '<div class="loading-message">✨ Analyzing with Gemini... (Step 1/2)</div>';
+                
+                const response = await fetch('/api/analyze/gemini', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ companyName })
+                }).catch(fetchError => {
+                    console.error('Fetch failed for Gemini:', fetchError);
+                    throw new Error(`Network error: ${fetchError.message}. The server might be unresponsive or the request timed out.`);
+                });
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Gemini API returned error:', response.status, errorText);
+                    throw new Error(`API error (${response.status}): ${errorText}`);
+                }
+                
+                const data = await response.json();
+                
+                if (response.ok && data.analysis) {
+                    console.log('✅ Gemini analysis loaded, now summarizing...');
+                    
+                    // Show loading for summarization
+                    container.innerHTML = '<div class="loading-message">📝 Creating summary with ChatGPT... (Step 2/2)</div>';
+                    
+                    // Get summary from ChatGPT
+                    const summaryResponse = await fetch('/api/summarize/gemini', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ detailedAnalysis: data.analysis })
+                    });
+                    
+                    const summaryData = await summaryResponse.json();
+                    
+                    // Store both versions
+                    window.geminiAnalysis = {
+                        expanded: data.analysis,
+                        summary: summaryData.summary || data.analysis,
+                        companyName: companyName,
+                        model: data.model,
+                        groundingMetadata: data.groundingMetadata,
+                        currentView: 'summary'  // Default to summary
+                    };
+                    
+                    // Display summary by default
+                    displayGeminiAnalysis('summary', data, summaryData);
+                    
+                    // Store API log
+                    window.aiApiLogs.gemini = {
+                        request: data.apiRequest,
+                        response: data.apiResponse,
+                        groundingMetadata: data.groundingMetadata,
+                        timeTaken: data.timeTaken,
+                        summaryTimeTaken: summaryData.timeTaken
+                    };
+                    
+                    console.log('✅ Gemini analysis and summary loaded');
+                } else {
+                    container.innerHTML = `
+                        <div class="ai-error">
+                            <strong>❌ ${data.error || 'Failed to load Gemini analysis'}</strong><br>
+                            ${data.message || ''}<br>
+                            ${data.timeout ? '<small>⏱️ Request timed out. Gemini with Google Search can take up to 2 minutes for deep research.</small>' : ''}
+                            <small style="color: #999; margin-top: 10px; display: block;">
+                                Time taken: ${data.timeTaken || 'N/A'}s
+                            </small>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Gemini analysis error:', error);
+                container.innerHTML = `
+                    <div class="ai-error">
+                        <strong>❌ Error loading Gemini analysis</strong><br>
+                        ${error.message}<br>
+                        <small style="color: #999; margin-top: 10px; display: block;">
+                            This might be due to timeout with Google Search grounding. Try refreshing the page.
+                        </small>
+                    </div>
+                `;
+            }
+        }
+        
+        /**
+         * Display Gemini Analysis (Summary or Expanded)
+         */
+        function displayGeminiAnalysis(view, geminiData, summaryData) {
+            const container = document.getElementById('geminiContent');
+            const analysis = window.geminiAnalysis;
+            
+            const content = view === 'summary' ? analysis.summary : analysis.expanded;
+            const isSummary = view === 'summary';
+            
+            container.innerHTML = `
+                <div style="background: linear-gradient(135deg, #4285f4 0%, #1a73e8 100%); padding: 20px 30px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(66, 133, 244, 0.2);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <div>
+                            <h3 style="color: white; margin: 0; font-size: 20px; font-weight: 700;">
+                                🏢 Prime Contractor Organizational Overview
+                            </h3>
+                            <div style="color: rgba(255, 255, 255, 0.85); font-size: 13px; margin-top: 5px;">
+                                Google Search-powered intelligence on ${analysis.companyName}
+                                ${geminiData.groundingMetadata && geminiData.groundingMetadata.webSearchQueries > 0 ? `
+                                    • ${geminiData.groundingMetadata.webSearchQueries} web queries
+                                ` : ''}
+                            </div>
+                        </div>
+                        <button class="download-excel-btn" onclick="downloadGeminiWord()" style="background: white; color: #4285f4; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                            📄 Download as Word
+                        </button>
+                    </div>
+                    <div style="text-align: center; margin-top: 10px;">
+                        <button onclick="toggleGeminiView()" style="
+                            padding: 8px 20px;
+                            background: ${isSummary ? 'rgba(255,255,255,0.2)' : 'white'};
+                            color: ${isSummary ? 'white' : '#4285f4'};
+                            border: 2px solid white;
+                            border-radius: 20px;
+                            cursor: pointer;
+                            font-weight: 600;
+                            font-size: 13px;
+                            transition: all 0.3s;
+                        ">
+                            ${isSummary ? '📖 Show Expanded Version' : '📋 Show Summary'}
+                        </button>
+                    </div>
+                </div>
+                <div class="ai-analysis-content">
+                    ${parseMarkdown(content)}
+                </div>
+                <div style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-radius: 8px; border-left: 3px solid #4caf50;">
+                    <div style="font-size: 12px; color: #2e7d32;">
+                        ${isSummary ? '📋 Showing Summary View' : '📖 Showing Expanded View'}
+                        <br>⚡ Analysis completed in ${geminiData.timeTaken}s using ${geminiData.model}
+                        ${geminiData.groundingMetadata && geminiData.groundingMetadata.webSearchQueries > 0 ? `
+                            <br>🔍 <strong>Google Search Grounding:</strong> ${geminiData.groundingMetadata.webSearchQueries} web searches performed
+                        ` : ''}
+                        ${summaryData && summaryData.timeTaken ? `
+                            <br>📝 Summary generated in ${summaryData.timeTaken}s using ${summaryData.model}
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+        
+        /**
+         * Toggle Gemini Analysis between Summary and Expanded
+         */
+        function toggleGeminiView() {
+            if (!window.geminiAnalysis) return;
+            
+            const currentView = window.geminiAnalysis.currentView;
+            const newView = currentView === 'summary' ? 'expanded' : 'summary';
+            
+            window.geminiAnalysis.currentView = newView;
+            
+            // Re-display with new view
+            displayGeminiAnalysis(newView, {
+                timeTaken: window.aiApiLogs.gemini.timeTaken,
+                model: window.geminiAnalysis.model,
+                groundingMetadata: window.geminiAnalysis.groundingMetadata
+            }, {
+                timeTaken: window.aiApiLogs.gemini.summaryTimeTaken,
+                model: 'gpt-4o'
+            });
+        }
+
+        /**
+         * Enhanced markdown parser for AI responses
+         */
+        function parseMarkdown(markdown) {
+            if (!markdown) return '';
+            
+            console.log('Parsing markdown:', markdown.substring(0, 200)); // Debug
+            
+            let html = markdown;
+            
+            // Method 1: Try to parse markdown tables
+            // Split by lines and look for table structure
+            const lines = html.split(/\r?\n/);
+            let inTable = false;
+            let tableBuffer = [];
+            let processedLines = [];
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                
+                // Check if this line is a table row (starts and ends with |)
+                if (line.trim().match(/^\|.*\|$/)) {
+                    if (!inTable) {
+                        inTable = true;
+                        tableBuffer = [];
+                    }
+                    tableBuffer.push(line);
+                } else {
+                    // Not a table line
+                    if (inTable) {
+                        // We just finished a table, process it
+                        processedLines.push(parseTable(tableBuffer));
+                        inTable = false;
+                        tableBuffer = [];
+                    }
+                    processedLines.push(line);
+                }
+            }
+            
+            // Check if we ended with a table
+            if (inTable && tableBuffer.length > 0) {
+                processedLines.push(parseTable(tableBuffer));
+            }
+            
+            html = processedLines.join('\n');
+            
+            // Process remaining markdown
+            html = html
+                // Bold
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                // Links
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+                // Headers
+                .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+                .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+                .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+                // Paragraphs
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br>');
+            
+            return `<div>${html}</div>`;
+        }
+        
+        /**
+         * Parse a markdown table from lines
+         */
+        function parseTable(lines) {
+            if (lines.length < 2) return lines.join('\n');
+            
+            // First line is header
+            const headerLine = lines[0];
+            const headerCells = headerLine.split('|')
+                .map(c => c.trim())
+                .filter(c => c.length > 0)
+                .map(c => {
+                    let cell = c.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+                    cell = cell.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+                    return `<th>${cell}</th>`;
+                })
+                .join('');
+            
+            // Second line should be separator (|---|---|), skip it
+            let dataStartIndex = 1;
+            if (lines[1] && lines[1].match(/^\|[\s:-]+\|/)) {
+                dataStartIndex = 2;
+            }
+            
+            // Remaining lines are data rows
+            const rowsHtml = lines.slice(dataStartIndex).map(row => {
+                if (!row.trim()) return '';
+                
+                const cells = row.split('|')
+                    .map(c => c.trim())
+                    .filter(c => c.length > 0)
+                    .map(c => {
+                        let cell = c.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+                        cell = cell.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+                        
+                        if (cell.toLowerCase().includes('not found')) {
+                            cell = `<em style="color: #999;">${cell}</em>`;
+                        }
+                        
+                        return `<td>${cell}</td>`;
+                    })
+                    .join('');
+                    
+                return cells ? `<tr>${cells}</tr>` : '';
+            }).filter(row => row).join('');
+            
+            return `<table class="ai-analysis-table"><thead><tr>${headerCells}</tr></thead><tbody>${rowsHtml}</tbody></table>`;
+        }
+
+        /**
+         * Initialize AI Analysis after contract data loads
+         * Runs ALL analyses in parallel for maximum speed
+         */
+        function initializeAIAnalysis(contractData) {
+            try {
+                // Get recipient name from contract data
+                const recipientName = contractData['Recipient Name'] || contractData.recipient?.recipient_name;
+                
+                if (!recipientName) {
+                    console.warn('⚠️ No recipient name found for AI analysis');
+                    document.getElementById('perplexityContent').innerHTML = '<div class="ai-error">⚠️ No company name available for analysis</div>';
+                    document.getElementById('geminiContent').innerHTML = '<div class="ai-error">⚠️ No company name available for analysis</div>';
+                    return;
+                }
+                
+                console.log('🚀 Initializing AI analysis for prime contractor:', recipientName);
+                
+                // Wait a bit for subcontractor data to load
+                setTimeout(() => {
+                    const subcontractors = window.top5Subcontractors || [];
+                    const totalCompanies = 1 + subcontractors.length; // Prime + subs
+                    const totalAPICalls = totalCompanies * 2; // Each company gets Perplexity + Gemini
+                    
+                    console.log(`⚡ Starting ${totalAPICalls} AI API calls in parallel for ${totalCompanies} companies`);
+                    
+                    // Prepare subcontractor section headers if we have subs
+                    if (subcontractors.length > 0) {
+                        prepareSubcontractorSections(subcontractors);
+                    }
+                    
+                    // Get contract details for research
+                    const awardId = contractData.piid || contractData.fain || contractData.uri || 'N/A';
+                    const description = contractData.description || 'No description';
+                    
+                    // Build array of ALL API calls to run in parallel
+                    const apiCalls = [];
+                    
+                    // Contract name research (Gemini with Google Search)
+                    apiCalls.push(loadContractResearch(awardId, recipientName, description));
+                    
+                    // Prime contractor analyses
+                    apiCalls.push(loadPerplexityAnalysis(recipientName));
+                    apiCalls.push(loadGeminiAnalysis(recipientName));
+                    
+                    // Subcontractor analyses
+                    subcontractors.forEach((sub, index) => {
+                        addSubcontractorPlaceholder('perplexity', sub, index);
+                        addSubcontractorPlaceholder('gemini', sub, index);
+                        
+                        apiCalls.push(loadSubcontractorPerplexityAnalysis(sub.name, index));
+                        apiCalls.push(loadSubcontractorGeminiAnalysis(sub.name, index));
+                    });
+                    
+                    // Run ALL analyses in parallel
+                    const startTime = Date.now();
+                    const totalCalls = apiCalls.length;
+                    console.log(`⚡ Starting ${totalCalls} AI API calls in parallel`);
+                    
+                    Promise.all(apiCalls).then(() => {
+                        const totalTime = ((Date.now() - startTime) / 1000).toFixed(2);
+                        console.log(`✅ All ${totalCalls} AI analyses completed in ${totalTime}s (parallel execution)`);
+                        updateDeveloperCornerWithAILogs();
+                    }).catch(error => {
+                        console.error('Error in parallel AI analysis:', error);
+                    });
+                    
+                }, 3000); // Wait 3 seconds for subcontractor data to load
+                
+            } catch (error) {
+                console.error('Error initializing AI analysis:', error);
+            }
+        }
+        
+        /**
+         * Prepare subcontractor section headers
+         */
+        function prepareSubcontractorSections(subcontractors) {
+            const perplexityContainer = document.getElementById('perplexitySubcontractors');
+            const geminiContainer = document.getElementById('geminiSubcontractors');
+            
+            if (perplexityContainer) {
+                perplexityContainer.innerHTML = `
+                    <div style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%); padding: 15px 25px; border-radius: 10px; margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="text-align: left;">
+                                <h3 style="color: white; margin: 0; font-size: 18px; font-weight: 700;">
+                                    👥 Top 5 Sub-Contractor Organizational Overviews
+                                </h3>
+                                <div style="color: rgba(255, 255, 255, 0.85); font-size: 12px; margin-top: 5px;">
+                                    Analyzing ${subcontractors.length} highest-value subcontractors
+                                </div>
+                            </div>
+                            <button class="download-excel-btn" onclick="downloadAllSubcontractorsPerplexityWord()" style="background: white; color: #667eea; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                                📄 Download All 5 as Word
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            if (geminiContainer) {
+                geminiContainer.innerHTML = `
+                    <div style="background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%); padding: 15px 25px; border-radius: 10px; margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="text-align: left;">
+                                <h3 style="color: white; margin: 0; font-size: 18px; font-weight: 700;">
+                                    👥 Top 5 Sub-Contractor Organizational Overviews
+                                </h3>
+                                <div style="color: rgba(255, 255, 255, 0.85); font-size: 12px; margin-top: 5px;">
+                                    Analyzing ${subcontractors.length} highest-value subcontractors with Google Search
+                                </div>
+                            </div>
+                            <button class="download-excel-btn" onclick="downloadAllSubcontractorsGeminiWord()" style="background: white; color: #4285f4; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                                📄 Download All 5 as Word
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        /**
+         * Add placeholder for subcontractor analysis
+         */
+        function addSubcontractorPlaceholder(type, subcontractor, index) {
+            const containerId = type === 'perplexity' ? 'perplexitySubcontractors' : 'geminiSubcontractors';
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            const color = type === 'perplexity' ? '#764ba2' : '#4285f4';
+            const emoji = type === 'perplexity' ? '🤖' : '✨';
+            
+            const placeholder = document.createElement('div');
+            placeholder.id = `${type}Subcontractor${index}`;
+            placeholder.style.marginBottom = '30px';
+            placeholder.innerHTML = `
+                <div style="background: #f5f7fa; padding: 20px; border-radius: 12px; border-left: 4px solid ${color};">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <div>
+                            <h4 style="margin: 0; font-size: 16px; font-weight: 700; color: #333;">
+                                ${emoji} Subcontractor ${index + 1}: ${subcontractor.name}
+                            </h4>
+                            <div style="font-size: 12px; color: #666; margin-top: 5px;">
+                                Amount: $${subcontractor.amount.toLocaleString('en-US', {minimumFractionDigits: 2})}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="loading-message">Analyzing...</div>
+                </div>
+            `;
+            
+            container.appendChild(placeholder);
+        }
+        
+        /**
+         * Load Perplexity Analysis for Subcontractor
+         */
+        async function loadSubcontractorPerplexityAnalysis(companyName, index) {
+            const container = document.getElementById(`perplexitySubcontractor${index}`);
+            if (!container) return;
+            
+            try {
+                const response = await fetch('/api/analyze/perplexity', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ companyName })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.analysis) {
+                    const sub = window.top5Subcontractors[index];
+                    
+                    // Store analysis for download
+                    if (!window.subcontractorPerplexityAnalyses) {
+                        window.subcontractorPerplexityAnalyses = {};
+                    }
+                    window.subcontractorPerplexityAnalyses[index] = {
+                        content: data.analysis,
+                        companyName: sub.name,
+                        model: data.model
+                    };
+                    
+                    container.innerHTML = `
+                        <div style="background: #f5f7fa; padding: 20px; border-radius: 12px; border-left: 4px solid #764ba2;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <div>
+                                    <h4 style="margin: 0; font-size: 16px; font-weight: 700; color: #333;">
+                                        🤖 Subcontractor ${index + 1}: ${sub.name}
+                                    </h4>
+                                    <div style="font-size: 12px; color: #666; margin-top: 5px;">
+                                        Amount: $${sub.amount.toLocaleString('en-US', {minimumFractionDigits: 2})}
+                                    </div>
+                                </div>
+                                <button class="download-excel-btn" onclick="downloadSubcontractorPerplexityWord(${index})" style="background: linear-gradient(135deg, #667eea, #764ba2); padding: 6px 14px; font-size: 11px;">
+                                    📄 Word
+                                </button>
+                            </div>
+                            <div class="ai-analysis-content" style="font-size: 13px;">
+                                ${parseMarkdown(data.analysis)}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    container.querySelector('.loading-message').textContent = 'Analysis unavailable';
+                }
+            } catch (error) {
+                console.error(`Error analyzing subcontractor ${companyName}:`, error);
+                if (container.querySelector('.loading-message')) {
+                    container.querySelector('.loading-message').textContent = 'Error: ' + error.message;
+                }
+            }
+        }
+        
+        /**
+         * Load Gemini Analysis for Subcontractor (with summary)
+         */
+        async function loadSubcontractorGeminiAnalysis(companyName, index) {
+            const container = document.getElementById(`geminiSubcontractor${index}`);
+            if (!container) return;
+            
+            try {
+                // Get full analysis
+                const response = await fetch('/api/analyze/gemini', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ companyName })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.analysis) {
+                    // Get summary
+                    const summaryResponse = await fetch('/api/summarize/gemini', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ detailedAnalysis: data.analysis })
+                    });
+                    
+                    const summaryData = await summaryResponse.json();
+                    const sub = window.top5Subcontractors[index];
+                    
+                    // Store both versions
+                    if (!window.subcontractorAnalyses) window.subcontractorAnalyses = {};
+                    window.subcontractorAnalyses[index] = {
+                        expanded: data.analysis,
+                        summary: summaryData.summary || data.analysis,
+                        currentView: 'summary'
+                    };
+                    
+                    displaySubcontractorGemini(index, sub, data, summaryData, 'summary');
+                } else {
+                    container.querySelector('.loading-message').textContent = 'Analysis unavailable';
+                }
+            } catch (error) {
+                console.error(`Error analyzing subcontractor ${companyName}:`, error);
+                container.querySelector('.loading-message').textContent = 'Error: ' + error.message;
+            }
+        }
+        
+        /**
+         * Display Subcontractor Gemini Analysis
+         */
+        function displaySubcontractorGemini(index, sub, geminiData, summaryData, view) {
+            const container = document.getElementById(`geminiSubcontractor${index}`);
+            if (!container) return;
+            
+            const analysis = window.subcontractorAnalyses[index];
+            const content = view === 'summary' ? analysis.summary : analysis.expanded;
+            const isSummary = view === 'summary';
+            
+            container.innerHTML = `
+                <div style="background: #f5f7fa; padding: 20px; border-radius: 12px; border-left: 4px solid #4285f4;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <div style="flex: 1;">
+                            <h4 style="margin: 0; font-size: 16px; font-weight: 700; color: #333;">
+                                ✨ Subcontractor ${index + 1}: ${sub.name}
+                            </h4>
+                            <div style="font-size: 12px; color: #666; margin-top: 5px;">
+                                Amount: $${sub.amount.toLocaleString('en-US', {minimumFractionDigits: 2})}
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <button onclick="toggleSubcontractorView(${index})" style="
+                                padding: 6px 16px;
+                                background: ${isSummary ? '#f0f0f0' : '#4285f4'};
+                                color: ${isSummary ? '#4285f4' : 'white'};
+                                border: 1px solid #4285f4;
+                                border-radius: 16px;
+                                cursor: pointer;
+                                font-weight: 600;
+                                font-size: 11px;
+                            ">
+                                ${isSummary ? '📖 Expand' : '📋 Summary'}
+                            </button>
+                            <button class="download-excel-btn" onclick="downloadSubcontractorGeminiWord(${index})" style="background: linear-gradient(135deg, #4285f4, #1a73e8); padding: 6px 14px; font-size: 11px;">
+                                📄 Word
+                            </button>
+                        </div>
+                    </div>
+                    <div class="ai-analysis-content" style="font-size: 13px;">
+                        ${parseMarkdown(content)}
+                    </div>
+                </div>
+            `;
+        }
+        
+        /**
+         * Toggle subcontractor view
+         */
+        function toggleSubcontractorView(index) {
+            if (!window.subcontractorAnalyses || !window.subcontractorAnalyses[index]) return;
+            
+            const analysis = window.subcontractorAnalyses[index];
+            const newView = analysis.currentView === 'summary' ? 'expanded' : 'summary';
+            analysis.currentView = newView;
+            
+            const sub = window.top5Subcontractors[index];
+            displaySubcontractorGemini(index, sub, {}, {}, newView);
+        }
+
+        /**
+         * Update Developer Corner with AI API logs
+         */
+        function updateDeveloperCornerWithAILogs() {
+            const devCorner = document.getElementById('developerCorner');
+            if (!devCorner) return;
+            
+            // Add AI API logs section if we have logs
+            if (window.aiApiLogs.perplexity || window.aiApiLogs.gemini) {
+                const aiLogsSection = document.createElement('div');
+                aiLogsSection.className = 'raw-json-section';
+                aiLogsSection.innerHTML = `
+                    <div class="raw-json-header">
+                        <div class="raw-json-title">🤖 AI Analysis API Logs</div>
+                    </div>
+                    
+                    ${window.aiApiLogs.perplexity ? `
+                        <div style="margin-bottom: 30px;">
+                            <h4 style="color: white; margin-bottom: 15px;">Perplexity API</h4>
+                            <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                                <strong style="color: #667eea;">Request:</strong>
+                                <pre style="margin-top: 10px; color: #e0e0e0; font-size: 12px; overflow-x: auto;">${JSON.stringify(window.aiApiLogs.perplexity.request, null, 2)}</pre>
+                                <div style="margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.7);">
+                                    🔐 API Key: pplx-xxxxxxxxxxxxxxxx (masked for security)
+                                </div>
+                            </div>
+                            <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px;">
+                                <strong style="color: #667eea;">Response Metadata:</strong>
+                                <pre style="margin-top: 10px; color: #e0e0e0; font-size: 12px; overflow-x: auto;">${JSON.stringify(window.aiApiLogs.perplexity.response, null, 2)}</pre>
+                                <div style="margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.7);">
+                                    ⚡ Completed in ${window.aiApiLogs.perplexity.timeTaken}s
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    ${window.aiApiLogs.gemini ? `
+                        <div>
+                            <h4 style="color: white; margin-bottom: 15px;">Google Gemini API (with Google Search Grounding)</h4>
+                            <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                                <strong style="color: #4285f4;">Request:</strong>
+                                <pre style="margin-top: 10px; color: #e0e0e0; font-size: 12px; overflow-x: auto;">${JSON.stringify(window.aiApiLogs.gemini.request, null, 2)}</pre>
+                                <div style="margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.7);">
+                                    🔐 API Key: AIzaSy-xxxxxxxxxxxxxxxx (masked for security)
+                                </div>
+                            </div>
+                            ${window.aiApiLogs.gemini.groundingMetadata ? `
+                                <div style="background: rgba(76, 175, 80, 0.2); padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #4caf50;">
+                                    <strong style="color: #4caf50;">🔍 Google Search Grounding Metadata:</strong>
+                                    <pre style="margin-top: 10px; color: #e0e0e0; font-size: 12px; overflow-x: auto;">${JSON.stringify(window.aiApiLogs.gemini.groundingMetadata, null, 2)}</pre>
+                                    <div style="margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.7);">
+                                        ✅ Real-time web data retrieved and cited
+                                    </div>
+                                </div>
+                            ` : ''}
+                            <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px;">
+                                <strong style="color: #4285f4;">Response Metadata:</strong>
+                                <pre style="margin-top: 10px; color: #e0e0e0; font-size: 12px; overflow-x: auto;">${JSON.stringify(window.aiApiLogs.gemini.response, null, 2)}</pre>
+                                <div style="margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.7);">
+                                    ⚡ Completed in ${window.aiApiLogs.gemini.timeTaken}s
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+                `;
+                
+                // Insert after USAspending API section
+                const usaSpendingSection = devCorner.querySelector('.raw-json-section');
+                if (usaSpendingSection) {
+                    usaSpendingSection.after(aiLogsSection);
+                }
+            }
+        }
+
+        /**
+         * Download Perplexity Analysis as Word Document (Prime Contractor)
+         */
+        async function downloadPerplexityWord() {
+            if (!window.perplexityAnalysis) {
+                alert('No Perplexity analysis available to download.');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/generate-word-doc', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: window.perplexityAnalysis.content,
+                        title: 'Perplexity AI Analysis - ' + window.perplexityAnalysis.companyName,
+                        companyName: window.perplexityAnalysis.companyName,
+                        model: window.perplexityAnalysis.model
+                    })
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `Perplexity-Analysis-${window.perplexityAnalysis.companyName.replace(/[^a-z0-9]/gi, '-')}-${Date.now()}.docx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                    console.log('✅ Word document downloaded');
+                } else {
+                    alert('Failed to generate Word document');
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                alert('Error downloading Word document: ' + error.message);
+            }
+        }
+        
+        /**
+         * Download Subcontractor Perplexity Analysis as Word Document
+         */
+        async function downloadSubcontractorPerplexityWord(index) {
+            if (!window.subcontractorPerplexityAnalyses || !window.subcontractorPerplexityAnalyses[index]) {
+                alert('No analysis available to download.');
+                return;
+            }
+            
+            try {
+                const analysis = window.subcontractorPerplexityAnalyses[index];
+                const sub = window.top5Subcontractors[index];
+                
+                const response = await fetch('/api/generate-word-doc', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: analysis.content,
+                        title: `Subcontractor Analysis - ${analysis.companyName}`,
+                        companyName: analysis.companyName,
+                        model: analysis.model
+                    })
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `Subcontractor-${index + 1}-Perplexity-${analysis.companyName.replace(/[^a-z0-9]/gi, '-')}-${Date.now()}.docx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                    console.log(`✅ Subcontractor ${index + 1} Word document downloaded`);
+                } else {
+                    alert('Failed to generate Word document');
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                alert('Error downloading Word document: ' + error.message);
+            }
+        }
+        
+        /**
+         * Download All Perplexity Subcontractors as One Word Document
+         */
+        async function downloadAllSubcontractorsPerplexityWord() {
+            if (!window.subcontractorPerplexityAnalyses || Object.keys(window.subcontractorPerplexityAnalyses).length === 0) {
+                alert('No subcontractor analyses available to download.');
+                return;
+            }
+            
+            try {
+                // Combine all 5 subcontractor analyses into one document
+                let combinedContent = '# Top 5 Subcontractor Organizational Overviews\n\n';
+                combinedContent += `Generated: ${new Date().toLocaleString()}\n\n`;
+                combinedContent += '---\n\n';
+                
+                // Add each subcontractor analysis
+                for (let i = 0; i < 5; i++) {
+                    if (window.subcontractorPerplexityAnalyses[i]) {
+                        const analysis = window.subcontractorPerplexityAnalyses[i];
+                        const sub = window.top5Subcontractors[i];
+                        
+                        combinedContent += `## Subcontractor ${i + 1}: ${analysis.companyName}\n`;
+                        combinedContent += `**Contract Amount:** $${sub.amount.toLocaleString('en-US', {minimumFractionDigits: 2})}\n\n`;
+                        combinedContent += analysis.content + '\n\n';
+                        combinedContent += '---\n\n';
+                    }
+                }
+                
+                const response = await fetch('/api/generate-word-doc', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: combinedContent,
+                        title: 'Top 5 Subcontractors - Perplexity Analysis',
+                        companyName: 'Combined-Subcontractors',
+                        model: 'sonar-pro'
+                    })
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `Top-5-Subcontractors-Perplexity-${Date.now()}.docx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                    console.log('✅ Combined subcontractor Word document downloaded');
+                } else {
+                    alert('Failed to generate Word document');
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                alert('Error downloading Word document: ' + error.message);
+            }
+        }
+        
+        /**
+         * Download Individual Subcontractor Gemini Analysis as Word Document (Expanded version)
+         */
+        async function downloadSubcontractorGeminiWord(index) {
+            if (!window.subcontractorAnalyses || !window.subcontractorAnalyses[index]) {
+                alert('No analysis available to download.');
+                return;
+            }
+            
+            try {
+                const analysis = window.subcontractorAnalyses[index];
+                const sub = window.top5Subcontractors[index];
+                
+                const response = await fetch('/api/generate-word-doc', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: analysis.expanded,  // Always download expanded version
+                        title: `Subcontractor Analysis - ${sub.name}`,
+                        companyName: sub.name,
+                        model: 'gemini-2.5-flash'
+                    })
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `Subcontractor-${index + 1}-Gemini-${sub.name.replace(/[^a-z0-9]/gi, '-')}-${Date.now()}.docx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                    console.log(`✅ Subcontractor ${index + 1} Gemini Word document downloaded`);
+                } else {
+                    alert('Failed to generate Word document');
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                alert('Error downloading Word document: ' + error.message);
+            }
+        }
+        
+        /**
+         * Download All Gemini Subcontractors as One Word Document (Summaries)
+         */
+        async function downloadAllSubcontractorsGeminiWord() {
+            if (!window.subcontractorAnalyses || Object.keys(window.subcontractorAnalyses).length === 0) {
+                alert('No subcontractor analyses available to download.');
+                return;
+            }
+            
+            try {
+                // Combine all 5 subcontractor SUMMARIES into one document
+                let combinedContent = '# Top 5 Subcontractor Organizational Overviews\n\n';
+                combinedContent += `Generated: ${new Date().toLocaleString()}\n`;
+                combinedContent += `Model: Gemini ${window.geminiAnalysis?.model || 'gemini-2.5-flash'} with Google Search\n\n`;
+                combinedContent += '---\n\n';
+                
+                // Add each subcontractor summary
+                for (let i = 0; i < 5; i++) {
+                    if (window.subcontractorAnalyses[i]) {
+                        const analysis = window.subcontractorAnalyses[i];
+                        const sub = window.top5Subcontractors[i];
+                        
+                        combinedContent += `## Subcontractor ${i + 1}: ${sub.name}\n`;
+                        combinedContent += `**Contract Amount:** $${sub.amount.toLocaleString('en-US', {minimumFractionDigits: 2})}\n\n`;
+                        combinedContent += analysis.summary + '\n\n';
+                        combinedContent += '---\n\n';
+                    }
+                }
+                
+                const response = await fetch('/api/generate-word-doc', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: combinedContent,
+                        title: 'Top 5 Subcontractors - Gemini Summary',
+                        companyName: 'Combined-Subcontractors',
+                        model: 'gemini-2.5-flash'
+                    })
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `Top-5-Subcontractors-Gemini-Summary-${Date.now()}.docx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                    console.log('✅ Combined subcontractor summary Word document downloaded');
+                } else {
+                    alert('Failed to generate Word document');
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                alert('Error downloading Word document: ' + error.message);
+            }
+        }
+        
+        /**
+         * Download Gemini Analysis as Word Document (Always downloads expanded version)
+         */
+        async function downloadGeminiWord() {
+            if (!window.geminiAnalysis) {
+                alert('No Gemini analysis available to download.');
+                return;
+            }
+            
+            try {
+                // Always download the expanded (full) version
+                const response = await fetch('/api/generate-word-doc', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: window.geminiAnalysis.expanded,  // Always use expanded version for Word
+                        title: 'Gemini AI Analysis - ' + window.geminiAnalysis.companyName,
+                        companyName: window.geminiAnalysis.companyName,
+                        model: window.geminiAnalysis.model,
+                        groundingMetadata: window.geminiAnalysis.groundingMetadata
+                    })
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `Gemini-Analysis-${window.geminiAnalysis.companyName.replace(/[^a-z0-9]/gi, '-')}-${Date.now()}.docx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                    console.log('✅ Word document downloaded');
+                } else {
+                    alert('Failed to generate Word document');
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                alert('Error downloading Word document: ' + error.message);
             }
         }
 
         function toggleDeveloperCorner() {
-            const corner = document.getElementById('developerCorner');
-            const btn = event.target;
-            
-            if (corner.classList.contains('visible')) {
-                corner.classList.remove('visible');
-                btn.textContent = '🔓 Show Developer Corner';
-            } else {
-                corner.classList.add('visible');
-                btn.textContent = '🔒 Hide Developer Corner';
+            try {
+                const corner = document.getElementById('developerCorner');
+                const btn = event.target;
+                
+                if (!corner || !btn) return;
+                
+                if (corner.classList.contains('visible')) {
+                    corner.classList.remove('visible');
+                    btn.textContent = '🔓 Show Developer Corner';
+                } else {
+                    corner.classList.add('visible');
+                    btn.textContent = '🔒 Hide Developer Corner';
+                }
+            } catch (error) {
+                console.error('Error toggling developer corner:', error);
             }
         }
 
@@ -2341,6 +4151,24 @@
                     // Display sub-awards as a table
                     displaySubawardsTable(data.results || []);
                     
+                    // Extract top 5 subcontractors for AI analysis
+                    if (data.results && data.results.length > 0) {
+                        const sortedByAmount = [...data.results].sort((a, b) => {
+                            return (parseFloat(b.amount) || 0) - (parseFloat(a.amount) || 0);
+                        });
+                        
+                        const top5Subcontractors = sortedByAmount.slice(0, 5).map(sub => ({
+                            name: sub.recipient_name || 'Unknown',
+                            amount: parseFloat(sub.amount) || 0
+                        }));
+                        
+                        // Store globally for AI analysis
+                        window.top5Subcontractors = top5Subcontractors;
+                        
+                        console.log('🔍 Top 5 subcontractors identified for AI analysis:', 
+                            top5Subcontractors.map(s => s.name).join(', '));
+                    }
+                    
                     // Update JSON section
                     document.getElementById('subawardsJsonData').textContent = JSON.stringify(data, null, 2);
                     
@@ -2362,19 +4190,24 @@
         }
 
         function displaySubawardsTable(subawards) {
-            const container = document.getElementById('subcontractorTableContainer');
-            
-            if (!subawards || subawards.length === 0) {
-                container.innerHTML = '<div class="no-data-message">No sub-awards found for this contract.</div>';
-                return;
-            }
+            try {
+                const container = document.getElementById('subcontractorTableContainer');
+                if (!container) {
+                    console.error('Subcontractor table container not found');
+                    return;
+                }
+                
+                if (!subawards || subawards.length === 0) {
+                    container.innerHTML = '<div class="no-data-message">No sub-awards found for this contract.</div>';
+                    return;
+                }
 
-            // Sort by amount - highest first
-            const sortedSubawards = [...subawards].sort((a, b) => {
-                const amountA = parseFloat(a.amount) || 0;
-                const amountB = parseFloat(b.amount) || 0;
-                return amountB - amountA;
-            });
+                // Sort by amount - highest first
+                const sortedSubawards = [...subawards].sort((a, b) => {
+                    const amountA = parseFloat(a.amount) || 0;
+                    const amountB = parseFloat(b.amount) || 0;
+                    return amountB - amountA;
+                });
 
             // Calculate total sub-award amount from the data
             const totalSubawardAmount = sortedSubawards.reduce((sum, sub) => sum + (parseFloat(sub.amount) || 0), 0);
@@ -2436,9 +4269,16 @@
                 toggleBtn.textContent = 'Show All (' + sortedSubawards.length + ')';
             }
             
-            // Store the data for Excel export
-            window.currentSubawards = sortedSubawards;
-            window.totalSubawardAmount = totalSubawardAmount;
+                // Store the data for Excel export
+                window.currentSubawards = sortedSubawards;
+                window.totalSubawardAmount = totalSubawardAmount;
+            } catch (error) {
+                console.error('Error displaying subawards table:', error);
+                const container = document.getElementById('subcontractorTableContainer');
+                if (container) {
+                    container.innerHTML = '<div class="no-data-message">Error displaying sub-awards table. Please try again.</div>';
+                }
+            }
         }
 
         function downloadSubawardsExcel() {
@@ -2588,6 +4428,69 @@
             } catch (error) {
                 console.error('PDF generation error:', error);
                 alert('Failed to generate PDF: ' + error.message);
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        async function generateFPDSReport() {
+            const btn = event.target;
+            const originalText = btn.textContent;
+            
+            try {
+                const awardId = urlParams.get('awardId');
+                
+                if (!awardId) {
+                    alert('Award ID not found');
+                    return;
+                }
+                
+                // Construct FPDS URL
+                const fpdsUrl = 'https://www.fpds.gov/ezsearch/search.do?indexName=awardfull&templateName=1.5.3&s=FPDS.GOV&q=' + encodeURIComponent(awardId);
+                
+                // Update button to show loading
+                btn.textContent = '⏳ Generating PDF...';
+                btn.disabled = true;
+                
+                console.log('📄 Requesting FPDS PDF generation for:', fpdsUrl);
+                
+                // Call server to generate PDF
+                const response = await fetch('/api/generate-fpds-pdf', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        url: fpdsUrl,
+                        awardId: awardId
+                    })
+                });
+                
+                if (response.ok) {
+                    // Download the PDF
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `fpds-report-${awardId}-${Date.now()}.pdf`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                    
+                    btn.textContent = '✅ PDF Downloaded!';
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.disabled = false;
+                    }, 2000);
+                } else {
+                    const error = await response.json();
+                    throw new Error(error.message || 'FPDS PDF generation failed');
+                }
+                
+            } catch (error) {
+                console.error('FPDS PDF generation error:', error);
+                alert('Failed to generate FPDS PDF: ' + error.message);
                 btn.textContent = originalText;
                 btn.disabled = false;
             }

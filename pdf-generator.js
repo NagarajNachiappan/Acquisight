@@ -42,9 +42,10 @@ async function generatePDFFromURL(url, options = {}) {
         
         page = await browser.newPage();
         
-        // Set page timeout
-        page.setDefaultNavigationTimeout(90000); // 90 seconds for USAspending pages
-        page.setDefaultTimeout(30000);
+        // Set page timeout - use custom timeout if provided, otherwise default
+        const navigationTimeout = options.timeout || 90000; // Default 90 seconds
+        page.setDefaultNavigationTimeout(navigationTimeout);
+        page.setDefaultTimeout(options.timeout || 30000);
         
         // Set viewport for better PDF rendering
         await page.setViewport({
@@ -55,13 +56,14 @@ async function generatePDFFromURL(url, options = {}) {
         console.log('📍 Navigating to URL...');
         await page.goto(url, {
             waitUntil: ['load', 'domcontentloaded', 'networkidle0'],
-            timeout: 90000
+            timeout: navigationTimeout
         });
         
         console.log('✅ Page loaded, waiting for content to render...');
         
-        // Wait for the page to be fully rendered
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        // Wait for the page to be fully rendered - longer for FPDS
+        const renderWait = url.includes('fpds.gov') ? 10000 : 5000;
+        await new Promise(resolve => setTimeout(resolve, renderWait));
         
         // Generate filename if not provided
         const outputPath = options.outputPath || path.join(__dirname, 'public', `report-${Date.now()}.pdf`);
