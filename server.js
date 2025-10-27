@@ -25,9 +25,9 @@ const openai = new OpenAI({
     apiKey: config.openai.apiKey
 });
 
-// Middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// Middleware with increased payload limit for AI analyses
+app.use(bodyParser.json({ limit: '10mb' }));  // Increased from default 100kb to 10mb for large AI responses
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.use(express.static('public'));
 
 // Helper function to get default dates (last 10 years for keyword searches)
